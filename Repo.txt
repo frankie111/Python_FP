@@ -1,0 +1,3 @@
+hangman
+ha
+5
