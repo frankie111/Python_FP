@@ -1,16 +1,21 @@
 import turtle
 
 curr_sym = ""
+pace = 10  # ~= font size
+
+
+def get_pace():
+    return pace
 
 
 def move_forward(t):
-    t.fd(10)
+    t.fd(pace)
     global curr_sym
     curr_sym += 'w'
 
 
 def move_backward(t):
-    t.back(10)
+    t.back(pace)
     global curr_sym
     curr_sym += 's'
 

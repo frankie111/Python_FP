@@ -25,7 +25,7 @@ def draw_from_instructions(instr, t):
 
 
 def draw_str():
-    letter_spacing = 70
+    letter_spacing = get_pace() * 8
     txt = input("Enter the symbol / word to write: ")
 
     sym_dict = get_all_symbols()
@@ -57,26 +57,28 @@ def define_symbol():
     Defines a new symbol by moving a turtle via keyboard and saves it to the dictionary
     :return: None
     """
-    letter_spacing = 70
+    letter_spacing = get_pace() * 8
     sym = input("Enter the symbol: ")
     sym_dict = get_all_symbols()
     if sym in sym_dict.keys():
         option = input("Do you wish to override the symbol " + sym + "? (y/n)")
         match option:
             case 'y':
+                turtle.TurtleScreen._RUNNING = True
+                t = turtle.Turtle()
+
                 print("Overriding symbol " + sym + "...")
+                draw_from_instructions(sym_dict[sym], t)
+                t.setheading(0)
+                t.up()
+                t.setx(t.pos()[0] + letter_spacing)
+                t.sety(0)
+                t.down()
             case _:
                 return None
-
-    turtle.TurtleScreen._RUNNING = True
-    t = turtle.Turtle()
-
-    draw_from_instructions(sym_dict[sym], t)
-    t.setheading(0)
-    t.up()
-    t.setx(t.pos()[0] + letter_spacing)
-    t.sety(0)
-    t.down()
+    else:
+        turtle.TurtleScreen._RUNNING = True
+        t = turtle.Turtle()
 
     print("w - move forward 10 Pixels")
     print("s - move backwards 10 Pixels")
