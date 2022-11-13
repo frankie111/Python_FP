@@ -1,5 +1,4 @@
 import functools
-import turtle
 from turtle import *
 
 from ex1.symbol_dict import add_symbol, get_all_symbols
@@ -26,6 +25,7 @@ def draw_from_instructions(instr, t):
 
 
 def draw_str():
+    letter_spacing = 70
     txt = input("Enter the symbol / word to write: ")
 
     sym_dict = get_all_symbols()
@@ -34,6 +34,11 @@ def draw_str():
     t = turtle.Turtle()
 
     for char in txt:
+        t.setheading(0)
+        t.up()
+        t.setx(t.pos()[0] + letter_spacing)
+        t.sety(0)
+        t.down()
         if char in sym_dict.keys():
             draw_from_instructions(sym_dict[char], t)
 

@@ -8,8 +8,8 @@ def add_symbol(sym, instructions):
     :param instructions: A string containing the instructions needed to draw the symbol
     :return: None
     """
-    f = open(file, 'w')
     dic = get_all_symbols()
+    f = open(file, 'w')
     dic[sym] = instructions
 
     for key in dic.keys():
