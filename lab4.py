@@ -1,4 +1,5 @@
 import ex1.ex_1
+import ex2.ex_2
 
 
 def menu():
@@ -10,6 +11,9 @@ def menu():
     match option:
         case 1:
             ex1.ex_1.menu()
+            menu()
+        case 2:
+            ex2.ex_2.menu()
             menu()
         case _:
             print(str(option) + " is not a valid option!")

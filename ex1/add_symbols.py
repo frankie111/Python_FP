@@ -16,10 +16,12 @@ inst_dict = {
 
 
 def draw_from_instructions(instr, t):
-    f"""
+    """
     Draws a symbol by following the instructions from {instr}
     :param t: Turtle used to draw
-    :param instr: A string containing instructions
+    :type t: turtle.Turtle
+    :param instr: A string containing drawing instructions
+    :type instr: str
     :return: None
     """
     for char in instr:
@@ -27,6 +29,10 @@ def draw_from_instructions(instr, t):
 
 
 def draw_str():
+    """
+    Asks for a string input and draws it via turtle
+    :return: None
+    """
     letter_spacing = get_pace() * 8
     t_speed = 6
     txt = input("Enter the symbol / word to write: ")
@@ -50,6 +56,14 @@ def draw_str():
 
 
 def event_handler(key, tur):
+    """
+    Handles key presses
+    :param key: The keycode of the latest key press
+    :type key: str
+    :param tur: a Turtle object
+    :type tur: turtle.Turtle
+    :return: None
+    """
     functions = {'w': move_forward, 'a': rotate_left, 's': move_backward,
                  'd': rotate_right, 'f': move_up, 'g': move_down,
                  '.': draw_dot}
