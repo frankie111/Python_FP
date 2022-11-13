@@ -10,13 +10,15 @@ inst_dict = {
     "d": rotate_right,
     "a": rotate_left,
     "f": move_up,
-    "g": move_down
+    "g": move_down,
+    ".": draw_dot
 }
 
 
 def draw_from_instructions(instr, t):
     f"""
     Draws a symbol by following the instructions from {instr}
+    :param t: Turtle used to draw
     :param instr: A string containing instructions
     :return: None
     """
@@ -26,6 +28,7 @@ def draw_from_instructions(instr, t):
 
 def draw_str():
     letter_spacing = get_pace() * 8
+    t_speed = 6
     txt = input("Enter the symbol / word to write: ")
 
     sym_dict = get_all_symbols()
@@ -35,6 +38,7 @@ def draw_str():
 
     for char in txt:
         t.setheading(0)
+        t.speed(t_speed)
         t.up()
         t.setx(t.pos()[0] + letter_spacing)
         t.sety(0)
@@ -47,7 +51,8 @@ def draw_str():
 
 def event_handler(key, tur):
     functions = {'w': move_forward, 'a': rotate_left, 's': move_backward,
-                 'd': rotate_right, 'f': move_up, 'g': move_down}
+                 'd': rotate_right, 'f': move_up, 'g': move_down,
+                 '.': draw_dot}
 
     functions[key](tur)
 
@@ -89,7 +94,7 @@ def define_symbol():
 
     clear_sym()
     listen()
-    for k in 'wasdfg':
+    for k in 'wasdfg.':
         onkey(functools.partial(event_handler, k, t), k)
     onkey(bye, 'Return')
     mainloop()

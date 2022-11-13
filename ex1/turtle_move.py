@@ -1,7 +1,7 @@
 import turtle
 
 curr_sym = ""
-pace = 10  # ~= font size
+pace = 6  # ~= font size
 
 
 def get_pace():
@@ -42,6 +42,12 @@ def move_down(t):
     t.pd()
     global curr_sym
     curr_sym += 'g'
+
+
+def draw_dot(t):
+    t.dot(10)
+    global curr_sym
+    curr_sym += '.'
 
 
 def clear_sym():

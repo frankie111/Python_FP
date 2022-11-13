@@ -5,7 +5,7 @@ D wwwawwawwwwwwwawwawwwaawwwwwwwwww
 E wwwwssssaawwwwddwwwwssssaawwwwwddwwwwssss
 F aawwwwddwwwwssssaawwwwwddwwwwssss
 G fwgwwwwawwawwawawwfddddwwdwdwwdwwdwwwwgdwdwwwwwwwdwwdwwwwddw
-H aawwwwwwwwwsssssddwwwwwaawwwwwsssssssss
+H aawwwwwwwwwsssssddwwwwwaawwwwwsssssssssaafwwwww
 I wwwwssaawwwwwwwwwddwwssss
 J wwawwawwwwwwwwddddwwwwwwwwdwwdwwdwdww
 K aawwwwwwwwwwsssssdwwwwwwssssssddwwwwwwwfdddwwwwww
@@ -24,3 +24,6 @@ W fwwwgaaawdwawdwawdwawdwawdwddddwawdwawdwawdwawdwawaaawdwawdwddwdwawdwaaawawdwa
 X agwwwwwwwwwwsssssddwwwwwssssssssss
 Y aawwwwwwawwwwssssddwwwwfaaawww
 Z wwwwwsssssawawdwawdwawdwawdwawaawwwww
+. .faaaawwwww
+? fwwg.aafwwgwwwdwwawwwawwawwawwaw
+! fwwg.aafwwgwwwwwwwwwwfaaww
