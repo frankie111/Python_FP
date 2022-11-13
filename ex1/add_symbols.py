@@ -1,7 +1,7 @@
-import turtle
 from turtle import *
 
-from turtle_move import *
+from ex1.symbol_dict import add_symbol, get_all_symbols
+from ex1.turtle_move import *
 
 inst_dict = {
     "w": move_forward,
@@ -14,15 +14,44 @@ inst_dict = {
 
 
 def draw_from_instructions(instr):
-    t = turtle.Pen()
-
+    f"""
+    Draws a symbol by following the instructions from {instr}
+    :param instr: A string containing instructions
+    :return: None
+    """
     for char in instr:
-        inst_dict[char](t)
+        inst_dict[char]()
+
+
+def draw_str():
+    txt = input("Enter the symbol / word to write: ")
+
+    sym_dict = get_all_symbols()
+    init_turtle()
+
+    for char in txt:
+        if char in sym_dict.keys():
+            draw_from_instructions(sym_dict[char])
 
     turtle.exitonclick()
+    delete_turtle()
 
 
 def define_symbol():
+    """
+    Defines a new symbol by moving a turtle via keyboard and saves it to the dictionary
+    :return: None
+    """
+    sym = input("Enter the symbol: ")
+    sym_dict = get_all_symbols()
+    if sym in sym_dict.keys():
+        option = input("Do you wish to override the symbol " + sym + "? (y/n)")
+        match option:
+            case 'y':
+                print("Overriding symbol " + sym + "...")
+            case _:
+                return None
+
     print("w - move forward 10 Pixels")
     print("s - move backwards 10 Pixels")
     print("a - rotate left 45 Degrees")
@@ -43,10 +72,5 @@ def define_symbol():
     onkey(bye, 'Return')
     mainloop()
 
-    new_sym = get_sym()
-    print(new_sym)
-
-    turtle.exitonclick()
-
-
-define_symbol()
+    sym_instr = get_sym()
+    add_symbol(sym, sym_instr)

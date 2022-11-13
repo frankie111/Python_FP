@@ -1,16 +1,20 @@
-file = "symbols.txt"
+file = "ex1/symbols.txt"
 
 
-def add_symbol(sym, inst):
+def add_symbol(sym, instructions):
     """
     Add a new symbol to the symbols.txt file if not existent
     :param sym: A string representing the key of the symbol
-    :param inst: A string containing the instructions needed to draw the symbol
+    :param instructions: A string containing the instructions needed to draw the symbol
     :return: None
     """
-    f = open(file, 'a')
+    f = open(file, 'w')
     dic = get_all_symbols()
-    dic[sym] = inst
+    dic[sym] = instructions
+
+    for key in dic.keys():
+        f.write(str(key) + ' ' + str(dic[key]) + '\n')
+
     f.close()
 
 
@@ -21,6 +25,7 @@ def get_all_symbols():
     """
     dic = {}
     f = open(file, 'r')
+
     lines = f.readlines()
     for line in lines:
         space = line.find(' ')

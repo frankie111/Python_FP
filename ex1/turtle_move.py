@@ -1,7 +1,17 @@
 import turtle
 
 curr_sym = ""
-tut = turtle.Pen()
+tut = None
+
+
+def init_turtle():
+    global tut
+    tut = turtle.Pen()
+
+
+def delete_turtle():
+    global tut
+    tut = None
 
 
 def move_forward():
