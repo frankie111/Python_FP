@@ -57,6 +57,7 @@ def define_symbol():
     Defines a new symbol by moving a turtle via keyboard and saves it to the dictionary
     :return: None
     """
+    letter_spacing = 70
     sym = input("Enter the symbol: ")
     sym_dict = get_all_symbols()
     if sym in sym_dict.keys():
@@ -69,6 +70,13 @@ def define_symbol():
 
     turtle.TurtleScreen._RUNNING = True
     t = turtle.Turtle()
+
+    draw_from_instructions(sym_dict[sym], t)
+    t.setheading(0)
+    t.up()
+    t.setx(t.pos()[0] + letter_spacing)
+    t.sety(0)
+    t.down()
 
     print("w - move forward 10 Pixels")
     print("s - move backwards 10 Pixels")
