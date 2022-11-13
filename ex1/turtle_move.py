@@ -1,51 +1,40 @@
 import turtle
 
 curr_sym = ""
-tut = None
 
 
-def init_turtle():
-    global tut
-    tut = turtle.Pen()
-
-
-def delete_turtle():
-    global tut
-    tut = None
-
-
-def move_forward():
-    tut.fd(10)
+def move_forward(t):
+    t.fd(10)
     global curr_sym
     curr_sym += 'w'
 
 
-def move_backward():
-    tut.back(10)
+def move_backward(t):
+    t.back(10)
     global curr_sym
     curr_sym += 's'
 
 
-def rotate_right():
-    tut.right(45)
+def rotate_right(t):
+    t.right(45)
     global curr_sym
     curr_sym += 'd'
 
 
-def rotate_left():
-    tut.left(45)
+def rotate_left(t):
+    t.left(45)
     global curr_sym
     curr_sym += 'a'
 
 
-def move_up():
-    tut.pu()
+def move_up(t):
+    t.pu()
     global curr_sym
     curr_sym += 'f'
 
 
-def move_down():
-    tut.pd()
+def move_down(t):
+    t.pd()
     global curr_sym
     curr_sym += 'g'
 

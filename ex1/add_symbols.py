@@ -1,3 +1,5 @@
+import functools
+import turtle
 from turtle import *
 
 from ex1.symbol_dict import add_symbol, get_all_symbols
@@ -13,28 +15,36 @@ inst_dict = {
 }
 
 
-def draw_from_instructions(instr):
+def draw_from_instructions(instr, t):
     f"""
     Draws a symbol by following the instructions from {instr}
     :param instr: A string containing instructions
     :return: None
     """
     for char in instr:
-        inst_dict[char]()
+        inst_dict[char](t)
 
 
 def draw_str():
     txt = input("Enter the symbol / word to write: ")
 
     sym_dict = get_all_symbols()
-    init_turtle()
+
+    turtle.TurtleScreen._RUNNING = True
+    t = turtle.Turtle()
 
     for char in txt:
         if char in sym_dict.keys():
-            draw_from_instructions(sym_dict[char])
+            draw_from_instructions(sym_dict[char], t)
 
     turtle.exitonclick()
-    delete_turtle()
+
+
+def event_handler(key, tur):
+    functions = {'w': move_forward, 'a': rotate_left, 's': move_backward,
+                 'd': rotate_right, 'f': move_up, 'g': move_down}
+
+    functions[key](tur)
 
 
 def define_symbol():
@@ -52,6 +62,9 @@ def define_symbol():
             case _:
                 return None
 
+    turtle.TurtleScreen._RUNNING = True
+    t = turtle.Turtle()
+
     print("w - move forward 10 Pixels")
     print("s - move backwards 10 Pixels")
     print("a - rotate left 45 Degrees")
@@ -59,16 +72,10 @@ def define_symbol():
     print("f - pen up")
     print("g - pen down")
 
-    # t = turtle.Pen()
-
     clear_sym()
     listen()
-    onkey(move_forward, 'w')
-    onkey(rotate_left, 'a')
-    onkey(move_backward, 's')
-    onkey(rotate_right, 'd')
-    onkey(move_up, 'f')
-    onkey(move_down, 'g')
+    for k in 'wasdfg':
+        onkey(functools.partial(event_handler, k, t), k)
     onkey(bye, 'Return')
     mainloop()
 
