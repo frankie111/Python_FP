@@ -1,4 +1,4 @@
-file = "ex1/symbols.txt"
+file = "lab4/ex1/symbols.txt"
 
 
 def add_symbol(sym, instructions):

@@ -1,8 +1,8 @@
 import functools
 from turtle import *
 
-from ex1.symbol_dict import add_symbol, get_all_symbols
-from ex1.turtle_move import *
+from lab4.ex1.symbol_dict import get_all_symbols, add_symbol
+from lab4.ex1.turtle_move import *
 
 inst_dict = {
     "w": move_forward,

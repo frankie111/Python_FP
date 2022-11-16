@@ -1,4 +1,4 @@
-from ex1.add_symbols import define_symbol, draw_str
+from lab4.ex1.add_symbols import draw_str, define_symbol
 
 
 def menu():
