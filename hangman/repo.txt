@@ -1,0 +1,1 @@
+"{\"word\": \"hangman\", \"guessed_letters\": \"hangman\", \"lives\": 6}"

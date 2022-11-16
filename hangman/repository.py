@@ -1,45 +1,34 @@
-repo_file = "Repo.txt"
+import json
 
-word = "hangman"
-found_letters = ""
-lives = 6
+from hangman.state import HangState
 
-
-def fetch_data():
-    file = open(repo_file, "r+")
-    global word, found_letters, lives
-    word = file.readline()
-    found_letters = file.readline()
-    lives = int(file.readline())
+repo_file = "repo.txt"
+words_file = "words.txt"
 
 
-def get_word():
-    return word
+def save_state(state):
+    file = open(repo_file, 'w')
+    json.dump(state.encode(), file)
+    file.close()
 
 
-def get_lives():
-    return lives
+def get_state():
+    file = open(repo_file, 'r')
+    state = HangState(j=json.load(file))
+    file.close()
+    return state
 
 
-def get_found_letters():
-    return found_letters
+def add_word(word):
+    file = open(words_file, 'a')
+    file.write(word + '\n')
+    file.close()
 
 
-def decrement_lives():
-    global lives
-    lives -= 1
-
-
-def add_letter(letter):
-    global found_letters
-    if letter in word:
-        if letter not in found_letters:
-            found_letters += letter
-    else:
-        decrement_lives()
-
-
-fetch_data()
-print(word)
-print(lives)
-print(found_letters)
+def get_words():
+    file = open(words_file, 'r')
+    words = []
+    for line in file.readlines():
+        words.append(line[0:len(line) - 1])
+    file.close()
+    return words
