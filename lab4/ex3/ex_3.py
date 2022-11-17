@@ -1,6 +1,6 @@
 import random
 
-ascii_path = "lab4/ex3/rps_ascii.txt"
+ascii_path = "ex3/rps_ascii.txt"
 
 
 def menu():

@@ -1,4 +1,4 @@
-file = "lab4/ex1/symbols.txt"
+file = "ex1/symbols.txt"
 
 
 def add_symbol(sym, instructions):
@@ -28,9 +28,9 @@ def get_all_symbols():
 
     lines = f.readlines()
     for line in lines:
-        space = line.find(' ')
-        key = line[0: space]
-        val = line[space + 1: -1]
+        space = line.split(' ')
+        key = space[0]
+        val = space[1].strip()
         dic[key] = val
 
     f.close()
