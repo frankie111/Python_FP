@@ -1,7 +1,7 @@
 import turtle
 
 curr_sym = ""
-pace = 6  # ~= font size
+pace = 3  # ~= font size
 
 
 def get_pace():
