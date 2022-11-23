@@ -9,13 +9,16 @@ def add_symbol(sym, instructions):
     :return: None
     """
     dic = get_all_symbols()
-    f = open(file, 'w')
-    dic[sym] = instructions
 
-    for key in dic.keys():
-        f.write(str(key) + ' ' + str(dic[key]) + '\n')
+    if dic is not None:
 
-    f.close()
+        f = open(file, 'w')
+        dic[sym] = instructions
+
+        for key in dic.keys():
+            f.write(str(key) + ' ' + str(dic[key]) + '\n')
+
+        f.close()
 
 
 def get_all_symbols():
