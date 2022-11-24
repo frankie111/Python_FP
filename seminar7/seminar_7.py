@@ -1,3 +1,6 @@
+from cmath import pi
+
+
 class Fractie:
     def __init__(self, n, m):
         self.n = n
@@ -39,7 +42,33 @@ class Statistics:
         return anzahl
 
 
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+class Circle:
+    def __init__(self, r, c):
+        self.r = r  # number
+        self.c = c  # list, tuple
+
+    def print(self):
+        print(f'radius: {self.r}, center: {self.c}')
+
+    def move(self, dx, dy):
+        self.c = (self.c.x + dx, self.c.y + dy)
+
+    def resize(self, k):
+        self.r *= k
+
+    def area(self):
+        return pi * self.r ** 2
+
+
 def main():
-    dacia = Auto("marke", "modell", "baujahr", "farbe")
-    stats = Statistics()
-    stats.add_auto(dacia)
+    c = Circle(10, (1, 2))
+    c.print()
+
+
+main()
