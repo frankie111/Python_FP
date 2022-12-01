@@ -19,14 +19,19 @@ class DataFormatter:
 
     def load(self):
         """
-        Reads the JSON string from self.__file and converts it to a list of objects to be returned
-        :return:
+        Reads the JSON string from self.__file and converts it to a list of objects
+        :returns: A list of objects | -1 if file is empty
         """
-        return self.convert_from_string(self.read_file())
+        contents = self.read_file()
+        if contents == "":
+            return -1
+
+        return self.convert_from_string(contents)
 
     def read_file(self):
         """
         Reads and returns the contents of self.__file
+        :rtype: str
         """
         file = open(self.file, 'r')
         content = file.read()
@@ -47,7 +52,7 @@ class DataFormatter:
         Abstract method to be implemented in subclasses of DataFormatter.
         Converts a list of objects to a JSON string
         :param obj_list:
-        :return:
+        :rtype: str
         """
         pass
 
@@ -56,6 +61,6 @@ class DataFormatter:
         Abstract method to be implemented in subclasses of DataFormatter.
         Converts a JSON string to a list of objects
         :param string:
-        :return:
+        :rtype: list
         """
         pass

@@ -6,8 +6,11 @@ class Customer(Identifiable):
         super().__init__(id_)
         self.__name = name
         self.__address = address
-        if dict is not None:
+        if dict_ is not None:
             self.__dict__ = dict_
+
+    def __eq__(self, other):
+        return self.__name == other.__name and self.__address == other.__address
 
     @property
     def name(self):

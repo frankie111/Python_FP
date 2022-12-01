@@ -1,7 +1,7 @@
 import json
 
 from lab5.models.Order import Order
-from lab5.repository.DataFormatter import DataFormatter
+from lab5.repository.formatters.DataFormatter import DataFormatter
 
 
 class OrderFormatter(DataFormatter):

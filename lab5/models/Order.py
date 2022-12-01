@@ -9,7 +9,7 @@ class Order(Identifiable):
         self.__client_id = client_id
         self.__meals = meals
         self.__total_price = None
-        if dict is not None:
+        if dict_ is not None:
             self.__dict__ = dict_
 
     @property
