@@ -1,0 +1,8 @@
+[
+    {
+        "_Identifiable__id": "Bere Ursus",
+        "_Dish__portion_size": 500,
+        "_Dish__price": 8,
+        "_Drink__alcohol_content": 5
+    }
+]

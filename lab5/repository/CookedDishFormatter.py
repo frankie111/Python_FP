@@ -14,9 +14,3 @@ class CookedDishFormatter(DataFormatter):
     def convert_from_string(self, string):
         dish_dicts = json.loads(string)
         return list(map(lambda dish_dict: CookedDish(dict_=dish_dict), dish_dicts))
-
-    def save(self, obj_list):
-        self.write_to_file(self.convert_to_string(obj_list))
-
-    def load(self):
-        return self.convert_from_string(self.read_file())

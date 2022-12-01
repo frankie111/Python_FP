@@ -5,7 +5,7 @@ class CookedDish(Dish):
     def __init__(self, id_=None, portion_size=None, price=None, prep_time=None, dict_=None):
         super().__init__(id_, portion_size, price)
         self.__prep_time = prep_time
-        if dict is not None:
+        if dict_ is not None:
             self.__dict__ = dict_
 
     @property
