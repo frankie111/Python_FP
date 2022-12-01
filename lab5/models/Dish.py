@@ -1,11 +1,11 @@
 from lab5.models.Identifiable import Identifiable
 
 
-class Meal(Identifiable):
-    def __init__(self):
-        super().__init__()
-        self.__portion_size = None
-        self.__price = None
+class Dish(Identifiable):
+    def __init__(self, id_=None, portion_size=None, price=None):
+        super().__init__(id_)
+        self.__portion_size = portion_size
+        self.__price = price
 
     @property
     def portion_size(self):

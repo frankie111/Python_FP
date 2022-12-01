@@ -1,12 +1,13 @@
 from lab5.models.Identifiable import Identifiable
 
 
-class Client(Identifiable):
-    def __init__(self, id_, name, address):
-        super().__init__()
-        self.__id = id_
+class Customer(Identifiable):
+    def __init__(self, id_=None, name=None, address=None, dict_=None):
+        super().__init__(id_)
         self.__name = name
         self.__address = address
+        if dict is not None:
+            self.__dict__ = dict_
 
     @property
     def name(self):

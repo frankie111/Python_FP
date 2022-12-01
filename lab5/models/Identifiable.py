@@ -1,7 +1,7 @@
 class Identifiable:
 
-    def __init__(self):
-        self.__id = None
+    def __init__(self, id_=None):
+        self.__id = id_
 
     @property
     def id(self):
