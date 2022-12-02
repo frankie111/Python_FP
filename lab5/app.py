@@ -11,8 +11,12 @@ repo = Repository()
 c1 = Customer(0, "Mircea", "Rozdesti")
 c2 = Customer(0, "Cox", "Nasaud")
 c3 = Customer(0, "Baiatu", "Tocmai din India")
+c4 = Customer(0, "Mircea", "Nasaud")
 
 # repo.add_customer(c1)
 # repo.add_customer(c2)
 # repo.add_customer(c3)
+# repo.add_customer(c4)
 # repo.remove_customer(c2)
+for customer in repo.find_customer("z"):
+    print(customer.__dict__)
