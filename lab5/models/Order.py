@@ -4,10 +4,10 @@ from lab5.models.Identifiable import Identifiable
 
 
 class Order(Identifiable):
-    def __init__(self, id_=None, client_id=None, meals=None, dict_=None):
+    def __init__(self, id_=None, client_id=None, items=None, dict_=None):
         super().__init__(id_)
         self.__client_id = client_id
-        self.__meals = meals
+        self.__items = items
         self.__total_price = None
         if dict_ is not None:
             self.__dict__ = dict_
@@ -21,12 +21,12 @@ class Order(Identifiable):
         self.__client_id = client_id
 
     @property
-    def meals(self):
-        return self.__meals
+    def items(self):
+        return self.__items
 
-    @meals.setter
-    def meals(self, meals):
-        self.__meals = meals
+    @items.setter
+    def items(self, items):
+        self.__items = items
 
     @property
     def total_price(self):
@@ -38,19 +38,19 @@ class Order(Identifiable):
 
     def compute_total_price(self):
         """
-        Adds up the prices from the self.__meals list
+        Adds up the prices from the items list
         :returns: Total order price
         """
-        self.__total_price = reduce(lambda a, m: a + m.price, self.__meals, 0)
+        self.__total_price = reduce(lambda a, m: a + m.price, self.__items, 0)
         return self.__total_price
 
     def __generate_bill(self):
         """
-        Generates and returns a bill, containing the meals in self.__meals
+        Generates and returns a bill, containing the items of this order
         :returns: The bill as a string
         """
         self.compute_total_price()
-        bill_lines = list(map(lambda m: f"{m.id} " + "." * (30 - len(m.id)) + f" {m.price}", self.__meals))
+        bill_lines = list(map(lambda m: f"{m.id} " + "." * (30 - len(m.id)) + f" {m.price}", self.__items))
         bill_lines.insert(0, "Rechnung:\n")
         bill_lines.append(f"\nGesamtkosten " + '.' * 18 + f" {self.__total_price}")
 

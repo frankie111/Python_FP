@@ -12,6 +12,9 @@ class Customer(Identifiable):
     def __eq__(self, other):
         return self.__name == other.__name and self.__address == other.__address
 
+    def __str__(self):
+        return f"name = '{self.__name}', address = '{self.__address}'"
+
     @property
     def name(self):
         return self.__name
