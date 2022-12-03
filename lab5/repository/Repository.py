@@ -9,7 +9,7 @@ class Repository:
         """
         Adds an object to the database
         :param obj:
-        :returns: The result of the operation
+        :returns: The result of the operation as Repository.Result
         """
         obj_list = self.__formatter.load()
 
@@ -26,11 +26,36 @@ class Repository:
         else:
             return Repository.Result.ALREADY_EXISTS
 
+    def add_list(self, objects):
+        """
+        Adds a list of objects to the database
+        :param objects:
+        :returns: The result of the operation as Repository.Result
+        """
+        obj_list = self.__formatter.load()
+        result = Repository.Result.SUCCESS
+
+        if obj_list == -1:
+            for i in range(len(objects)):
+                objects[i].id=i
+            self.__formatter.save(objects)
+            return result
+
+        for obj in objects:
+            if obj not in obj_list:
+                next_id = obj_list[-1].id + 1
+                obj.id = next_id
+                obj_list.append(obj)
+            else:
+                result = Repository.Result.ALREADY_EXISTS
+        self.__formatter.save(obj_list)
+        return result
+
     def remove(self, obj):
         """
         Removes an object from the database
         :param obj:
-        :returns: The result of the operation
+        :returns: The result of the operation as Repository.Result
         """
         obj_list = self.__formatter.load()
 
@@ -50,7 +75,7 @@ class Repository:
         Updates an object in the database
         :param obj:
         :param updated_obj:
-        :returns: The result of the operation
+        :returns: The result of the operation as Repository.Result
         """
         obj_list = self.__formatter.load()
         lis = list(filter(lambda o: o == obj, obj_list))

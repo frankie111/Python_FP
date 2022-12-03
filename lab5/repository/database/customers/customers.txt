@@ -6,8 +6,8 @@
     },
     {
         "_Identifiable__id": 1,
-        "_Customer__name": "Cox",
-        "_Customer__address": "Nasaud"
+        "_Customer__name": "Bobi",
+        "_Customer__address": "Bobalna"
     },
     {
         "_Identifiable__id": 2,
@@ -18,5 +18,10 @@
         "_Identifiable__id": 3,
         "_Customer__name": "Mircea",
         "_Customer__address": "Nasaud"
+    },
+    {
+        "_Identifiable__id": 4,
+        "_Customer__name": "Andrei",
+        "_Customer__address": "Constanta"
     }
 ]
