@@ -13,7 +13,7 @@ class Customer(Identifiable):
         return self.__name == other.__name and self.__address == other.__address
 
     def __str__(self):
-        return f"name = '{self.__name}', address = '{self.__address}'"
+        return f"Name = '{self.__name}', Adresse = '{self.__address}'"
 
     @property
     def name(self):

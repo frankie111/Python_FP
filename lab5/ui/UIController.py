@@ -8,7 +8,7 @@ def header(title, sym='-'):
 
 
 def footer(title, sym='-'):
-    print(sym * 2 * len(title))
+    print(sym * (2 * (len(title) - len(sym))))
 
 
 def tooltip(tip):
@@ -18,8 +18,10 @@ def tooltip(tip):
 def warning(warn):
     print(f"!!{warn}!!")
 
+
 def invalid(msg="ungültige Option"):
     warning(msg)
+
 
 def menu(title, options, sym='-'):
     """

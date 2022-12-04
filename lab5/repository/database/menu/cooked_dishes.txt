@@ -1,0 +1,16 @@
+[
+    {
+        "_Identifiable__id": 0,
+        "_Dish__portion_size": "550",
+        "_Dish__price": "45",
+        "_Dish__name": "Pizza quattro formaggi",
+        "_CookedDish__prep_time": "45"
+    },
+    {
+        "_Identifiable__id": 1,
+        "_Dish__portion_size": "450",
+        "_Dish__price": "38",
+        "_Dish__name": "Burger",
+        "_CookedDish__prep_time": "30"
+    }
+]

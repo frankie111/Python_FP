@@ -36,7 +36,7 @@ class CustomerController:
                 # caller menu will resume
                 pass
             case _:
-                print("ungültige Option!")
+                invalid()
                 self.menu()
 
     def __show_all_customers(self):
@@ -57,7 +57,7 @@ class CustomerController:
         if res == Repository.Result.SUCCESS:
             print(f"Neuer Kunde hinzugefügt [{new_customer}]")
         elif res == Repository.Result.ALREADY_EXISTS:
-            print(f"Der Kunde [{new_customer}] ist bereits vorhanden!")
+            warning(f"Der Kunde [{new_customer}] ist bereits vorhanden")
 
     def __update_customer(self):
         header("Kunden aktualisieren nach index")
