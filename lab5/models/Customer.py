@@ -2,7 +2,7 @@ from lab5.models.Identifiable import Identifiable
 
 
 class Customer(Identifiable):
-    def __init__(self, id_=None, name=None, address=None, dict_=None):
+    def __init__(self, id_=0, name=None, address=None, dict_=None):
         super().__init__(id_)
         self.__name = name
         self.__address = address

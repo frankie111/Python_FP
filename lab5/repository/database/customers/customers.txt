@@ -1,0 +1,17 @@
+[
+    {
+        "_Identifiable__id": 0,
+        "_Customer__name": "Mircea",
+        "_Customer__address": "Rozdesti"
+    },
+    {
+        "_Identifiable__id": 1,
+        "_Customer__name": "Bobi",
+        "_Customer__address": "Bobalna"
+    },
+    {
+        "_Identifiable__id": 2,
+        "_Customer__name": "John",
+        "_Customer__address": "Constangeles"
+    }
+]
