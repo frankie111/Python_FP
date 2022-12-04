@@ -13,5 +13,10 @@
         "_Identifiable__id": 3,
         "_Customer__name": "Bobi",
         "_Customer__address": "Bobalna"
+    },
+    {
+        "_Identifiable__id": 4,
+        "_Customer__name": "Gion",
+        "_Customer__address": "Hatz"
     }
 ]

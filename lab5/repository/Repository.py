@@ -37,7 +37,7 @@ class Repository:
 
         if obj_list == -1:
             for i in range(len(objects)):
-                objects[i].id=i
+                objects[i].id = i
             self.__formatter.save(objects)
             return result
 
@@ -73,10 +73,11 @@ class Repository:
     def update(self, obj, updated_obj):
         """
         Updates an object in the database
-        :param obj:
-        :param updated_obj:
+        :param obj: The object to be updated
+        :param updated_obj: An object with the updated properties
         :returns: The result of the operation as Repository.Result
         """
+        assert type(obj) == type(updated_obj)
         obj_list = self.__formatter.load()
         lis = list(filter(lambda o: o == obj, obj_list))
         if len(lis) > 0:

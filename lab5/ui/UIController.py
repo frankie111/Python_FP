@@ -12,7 +12,7 @@ def footer(title, sym='-'):
 
 
 def tooltip(tip):
-    print(f"~~{tip}~~")
+    print(f"~~Tip: {tip}~~")
 
 
 def warning(warn):
