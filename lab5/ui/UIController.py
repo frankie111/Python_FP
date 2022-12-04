@@ -2,13 +2,13 @@ def cls():
     print('\n' * 100)
 
 
-def header(title):
+def header(title, sym='-'):
     print()
-    print('-' * (len(title) // 2) + title + '-' * (len(title) // 2))
+    print(sym * (len(title) // 2) + title + sym * (len(title) // 2))
 
 
-def footer(title):
-    print('-' * 2 * len(title))
+def footer(title, sym='-'):
+    print(sym * 2 * len(title))
 
 
 def tooltip(tip):
@@ -18,18 +18,21 @@ def tooltip(tip):
 def warning(warn):
     print(f"!!{warn}!!")
 
+def invalid(msg="ungültige Option"):
+    warning(msg)
 
-def menu(title, options):
+def menu(title, options, sym='-'):
     """
     Prints a menu
+    :param sym: Symbol for header line
     :param title: Title of the menu
     :param options: A list of options to be displayed
     :returns: the selected option
     """
-    header(title)
+    header(title, sym)
 
     for i in range(len(options)):
         print(f"{i + 1}. {options[i]}")
 
-    footer(title)
+    footer(title, sym)
     return input("->")

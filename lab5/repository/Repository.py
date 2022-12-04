@@ -92,7 +92,7 @@ class Repository:
 
         return Repository.Result.NOT_FOUND
 
-    def find(self, obj):
+    def search(self, obj):
         """
         Returns a list of matching objects from the database
         filters the database by part of the first not None attribute of obj

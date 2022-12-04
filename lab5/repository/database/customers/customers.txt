@@ -5,13 +5,13 @@
         "_Customer__address": "Rozdesti"
     },
     {
-        "_Identifiable__id": 1,
-        "_Customer__name": "Bobi",
-        "_Customer__address": "Bobalna"
-    },
-    {
         "_Identifiable__id": 2,
         "_Customer__name": "John",
         "_Customer__address": "Constangeles"
+    },
+    {
+        "_Identifiable__id": 3,
+        "_Customer__name": "Bobi",
+        "_Customer__address": "Bobalna"
     }
 ]
