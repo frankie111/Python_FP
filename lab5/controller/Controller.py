@@ -1,7 +1,5 @@
 from lab5.controller.CustomerController import CustomerController
 from lab5.controller.MenuController import MenuController
-from lab5.repository.CookedDishRepository import CookedDishRepository
-from lab5.repository.DrinkRepository import DrinkRepository
 from lab5.repository.OrderRepository import OrderRepository
 from lab5.ui.UIController import menu, invalid
 
@@ -16,7 +14,7 @@ class Controller:
         self.main_menu()
 
     def main_menu(self):
-        opt = menu("Restaurant Verwaltung app", ["Bestellungen", "Speisekarte", "Kunden"])
+        opt = menu("Restaurant Verwaltung app", ["Bestellungen", "Speisekarte", "Kunden", "<-Exit"])
         if not opt.isnumeric():
             invalid()
             self.main_menu()
@@ -32,6 +30,9 @@ class Controller:
             case 3:
                 self.customer_controller.menu()
                 self.main_menu()
+            case 4:
+                # Exit program
+                pass
             case _:
                 invalid()
                 self.main_menu()
