@@ -7,9 +7,9 @@ from lab5.ui.UIController import menu, invalid, header, footer, warning, tooltip
 
 
 class MenuController:
-    def __init__(self, db_root):
-        self.cooked_dish_repo = CookedDishRepository(f"{db_root}menu/cooked_dishes.txt")
-        self.drink_repo = DrinkRepository(f"{db_root}menu/drinks.txt")
+    def __init__(self, drink_repo, cooked_dish_repo):
+        self.__drink_repo = drink_repo
+        self.__cooked_dish_repo = cooked_dish_repo
 
     def menu(self):
         opt = menu("Speisekarte Verwaltung",
@@ -43,8 +43,8 @@ class MenuController:
 
     def __show_all_items(self):
         header("Speisekarte", '=_=')
-        drinks = self.drink_repo.get_all()
-        dishes = self.cooked_dish_repo.get_all()
+        drinks = self.__drink_repo.get_all()
+        dishes = self.__cooked_dish_repo.get_all()
         header("Getränke", "=")
         for i in range(len(drinks)):
             print(f"{i + 1}. {drinks[i]}")
@@ -83,7 +83,7 @@ class MenuController:
         alcohol_content = input("Alkoholgehalt=")
 
         new_drink = Drink(id_=0, name=name, portion_size=portion_size, price=price, alcohol_content=alcohol_content)
-        res = self.drink_repo.add(new_drink)
+        res = self.__drink_repo.add(new_drink)
         if res == Repository.Result.SUCCESS:
             print(f"Neues Getränk hinzugefügt: [{new_drink}]")
         elif res == Repository.Result.ALREADY_EXISTS:
@@ -98,7 +98,7 @@ class MenuController:
         prep_time = input("Zubereitungszeit=")
 
         new_dish = CookedDish(id_=0, name=name, portion_size=portion_size, price=price, prep_time=prep_time)
-        res = self.cooked_dish_repo.add(new_dish)
+        res = self.__cooked_dish_repo.add(new_dish)
         if res == Repository.Result.SUCCESS:
             print(f"Neue Speise hinzugefügt: [{new_dish}]")
         elif res == Repository.Result.ALREADY_EXISTS:
@@ -131,7 +131,7 @@ class MenuController:
         footer("Artikel aktualisieren nach index")
 
     def __update_drink(self):
-        drinks = self.drink_repo.get_all()
+        drinks = self.__drink_repo.get_all()
         opt = menu("Getränk aktualisieren", drinks, "=")
         if not opt.isnumeric():
             invalid()
@@ -160,7 +160,7 @@ class MenuController:
         if alcohol_content != '':
             updated_drink.alcohol_content = alcohol_content
 
-        res = self.drink_repo.update(drink, updated_drink)
+        res = self.__drink_repo.update(drink, updated_drink)
         if res == Repository.Result.SUCCESS:
             print(f"Das Getränk [{drink}] wurde zu [{updated_drink}] aktualisiert")
         elif res == Repository.Result.NOT_FOUND:
@@ -169,7 +169,7 @@ class MenuController:
         footer("Infos aktualisieren")
 
     def __update_dish(self):
-        dishes = self.cooked_dish_repo.get_all()
+        dishes = self.__cooked_dish_repo.get_all()
         opt = menu("Speise aktualisieren", dishes, "=")
         if not opt.isnumeric():
             invalid()
@@ -198,7 +198,7 @@ class MenuController:
         if prep_time != '':
             updated_dish.prep_time = prep_time
 
-        res = self.cooked_dish_repo.update(dish, updated_dish)
+        res = self.__cooked_dish_repo.update(dish, updated_dish)
         if res == Repository.Result.SUCCESS:
             print(f"Die Speise [{dish}] wurde zu [{updated_dish}] aktualisiert")
         elif res == Repository.Result.NOT_FOUND:
@@ -230,7 +230,7 @@ class MenuController:
                 self.__remove_item()
 
     def __remove_drink(self):
-        drinks = self.drink_repo.get_all()
+        drinks = self.__drink_repo.get_all()
         opt = menu("Getränk löschen", drinks, "=")
         if not opt.isnumeric():
             invalid()
@@ -241,7 +241,7 @@ class MenuController:
             self.__remove_drink()
 
         drink = drinks[opt - 1]
-        res = self.drink_repo.remove(drink)
+        res = self.__drink_repo.remove(drink)
 
         if res == Repository.Result.SUCCESS:
             print(f"Das Getränk [{drink}] wurde gelöscht")
@@ -249,7 +249,7 @@ class MenuController:
             warning(f"Das Getränk [{drink}] wurde nicht gefunden")
 
     def __remove_dish(self):
-        dishes = self.cooked_dish_repo.get_all()
+        dishes = self.__cooked_dish_repo.get_all()
         opt = menu("Speise löschen", dishes, "=")
         if not opt.isnumeric():
             invalid()
@@ -260,7 +260,7 @@ class MenuController:
             self.__remove_dish()
 
         dish = dishes[opt - 1]
-        res = self.cooked_dish_repo.remove(dish)
+        res = self.__cooked_dish_repo.remove(dish)
 
         if res == Repository.Result.SUCCESS:
             print(f"Die Speise [{dish}] wurde gelöscht")

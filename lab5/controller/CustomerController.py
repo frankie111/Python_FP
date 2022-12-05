@@ -5,8 +5,8 @@ from lab5.ui.UIController import menu, invalid, header, footer, warning, tooltip
 
 
 class CustomerController:
-    def __init__(self, db_root):
-        self.customer_repo = CustomerRepository(f"{db_root}customers/customers.txt")
+    def __init__(self, customer_repo):
+        self.__customer_repo = customer_repo
 
     def menu(self):
         opt = menu("Kunden Verwaltung",
@@ -41,7 +41,7 @@ class CustomerController:
 
     def __show_all_customers(self):
         header("Kundenliste")
-        customers = self.customer_repo.get_all()
+        customers = self.__customer_repo.get_all()
         for i in range(len(customers)):
             print(f"{i + 1}. {customers[i]}")
         footer("Kundenliste")
@@ -53,7 +53,7 @@ class CustomerController:
         footer("Neuer Kunde")
 
         new_customer = Customer(name=name, address=address)
-        res = self.customer_repo.add(new_customer)
+        res = self.__customer_repo.add(new_customer)
         if res == Repository.Result.SUCCESS:
             print(f"Neuer Kunde hinzugefügt [{new_customer}]")
         elif res == Repository.Result.ALREADY_EXISTS:
@@ -71,7 +71,7 @@ class CustomerController:
 
         match opt:
             case 1:
-                customers = self.customer_repo.get_all()
+                customers = self.__customer_repo.get_all()
             case 2:
                 opt = menu("Suche Kunden nach", ["Name", "Adresse"])
                 if not opt.isnumeric():
@@ -89,7 +89,7 @@ class CustomerController:
                     case _:
                         invalid()
                         self.__update_customer()
-                customers = self.customer_repo.search(customer)
+                customers = self.__customer_repo.search(customer)
             case _:
                 invalid()
                 self.__update_customer()
@@ -118,7 +118,7 @@ class CustomerController:
         if address != '':
             updated_cus.address = address
 
-        res = self.customer_repo.update(cus, updated_cus)
+        res = self.__customer_repo.update(cus, updated_cus)
         if res == Repository.Result.SUCCESS:
             print(f"Der Kunde [{cus}] wurde zu [{updated_cus}] aktualisiert")
         elif res == Repository.Result.NOT_FOUND:
@@ -138,7 +138,7 @@ class CustomerController:
 
         match opt:
             case 1:
-                customers = self.customer_repo.get_all()
+                customers = self.__customer_repo.get_all()
             case 2:
                 opt = menu("Suche Kunden nach", ["Name", "Adresse"])
                 if not opt.isnumeric():
@@ -156,7 +156,7 @@ class CustomerController:
                     case _:
                         invalid()
                         self.__remove_customer()
-                customers = self.customer_repo.search(customer)
+                customers = self.__customer_repo.search(customer)
             case _:
                 invalid()
                 self.__remove_customer()
@@ -171,7 +171,7 @@ class CustomerController:
             self.__remove_customer()
 
         cus = customers[opt - 1]
-        res = self.customer_repo.remove(cus)
+        res = self.__customer_repo.remove(cus)
         if res == Repository.Result.SUCCESS:
             print(f"Der Kunde {cus} wurde gelöscht")
         elif res == Repository.Result.NOT_FOUND:
@@ -200,7 +200,7 @@ class CustomerController:
                 self.__search_customer()
 
         header("Passende Kunden")
-        customers = self.customer_repo.search(customer)
+        customers = self.__customer_repo.search(customer)
         for i in range(len(customers)):
             print(f"{i + 1}. {customers[i]}")
         footer("Passende Kunden")
