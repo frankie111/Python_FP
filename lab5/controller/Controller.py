@@ -17,7 +17,8 @@ class Controller:
 
         self.customer_controller = CustomerController(self.__customer_repo)
         self.menu_controller = MenuController(self.__drink_repo, self.__cooked_dish_repo)
-        self.order_controller = OrderController(self.__customer_repo, self.__order_repo, self.__cooked_dish_repo, self.__drink_repo)
+        self.order_controller = OrderController(self.__customer_repo, self.__order_repo, self.__cooked_dish_repo,
+                                                self.__drink_repo)
 
     def run(self):
         self.main_menu()
@@ -32,7 +33,8 @@ class Controller:
 
         match opt:
             case 1:
-                self.order_menu()
+                self.order_controller.menu()
+                self.main_menu()
             case 2:
                 self.menu_controller.menu()
                 self.main_menu()

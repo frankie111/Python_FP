@@ -15,6 +15,9 @@ class Customer(Identifiable):
     def __str__(self):
         return f"Name = '{self.__name}', Adresse = '{self.__address}'"
 
+    def __hash__(self):
+        return hash(self.__str__())
+
     @property
     def name(self):
         return self.__name

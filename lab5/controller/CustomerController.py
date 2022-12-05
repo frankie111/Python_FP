@@ -5,7 +5,7 @@ from lab5.ui.UIController import menu, invalid, header, footer, warning, tooltip
 
 
 class CustomerController:
-    def __init__(self, customer_repo):
+    def __init__(self, customer_repo: CustomerRepository):
         self.__customer_repo = customer_repo
 
     def menu(self):
@@ -34,7 +34,7 @@ class CustomerController:
                 self.menu()
             case 6:
                 # caller menu will resume
-                pass
+                return
             case _:
                 invalid()
                 self.menu()

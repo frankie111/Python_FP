@@ -1,5 +1,7 @@
 from enum import Enum
 
+from lab5.models.Identifiable import Identifiable
+
 
 class Repository:
     def __init__(self, formatter):
@@ -12,14 +14,13 @@ class Repository:
         :returns: The result of the operation as Repository.Result
         """
         obj_list = self.__formatter.load()
+        obj.id = obj.__hash__()
 
         if obj_list == -1:
             self.__formatter.save([obj])
             return Repository.Result.SUCCESS
 
         if obj not in obj_list:
-            next_id = obj_list[-1].id + 1
-            obj.id = next_id
             obj_list.append(obj)
             self.__formatter.save(obj_list)
             return Repository.Result.SUCCESS
@@ -36,15 +37,14 @@ class Repository:
         result = Repository.Result.SUCCESS
 
         if obj_list == -1:
-            for i in range(len(objects)):
-                objects[i].id = i
+            for obj in objects:
+                obj.id = obj.__hash__()
             self.__formatter.save(objects)
             return result
 
         for obj in objects:
             if obj not in obj_list:
-                next_id = obj_list[-1].id + 1
-                obj.id = next_id
+                obj.id = obj.__hash__()
                 obj_list.append(obj)
             else:
                 result = Repository.Result.ALREADY_EXISTS
@@ -93,7 +93,7 @@ class Repository:
 
         return Repository.Result.NOT_FOUND
 
-    def search(self, obj):
+    def search(self, obj:Identifiable):
         """
         Returns a list of matching objects from the database
         filters the database by part of the first not None attribute of obj

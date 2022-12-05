@@ -14,6 +14,9 @@ class CookedDish(Dish):
     def __str__(self):
         return super().__str__() + f", Zubereitungszeit = '{self.__prep_time}'"
 
+    def __hash__(self):
+        return hash(self.__str__())
+
     @property
     def prep_time(self):
         return self.__prep_time

@@ -14,6 +14,9 @@ class Drink(Dish):
     def __str__(self):
         return super().__str__() + f", Alkoholgehalt = '{self.__alcohol_content}'"
 
+    def __hash__(self):
+        return hash(self.__str__())
+
     @property
     def alcohol_content(self):
         return self.__alcohol_content

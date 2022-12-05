@@ -4,21 +4,30 @@ from lab5.models.Identifiable import Identifiable
 
 
 class Order(Identifiable):
-    def __init__(self, id_=None, client_id=None, items=None, dict_=None):
+    def __init__(self, id_=None, customer_id=None, items=None, total_price=None, dict_=None):
         super().__init__(id_)
-        self.__client_id = client_id
+        self.__customer_id = customer_id
         self.__items = items
-        self.__total_price = None
+        self.__total_price = total_price
         if dict_ is not None:
             self.__dict__ = dict_
 
-    @property
-    def client_id(self):
-        return self.__client_id
+    def __eq__(self, other):
+        return super().__eq__(other) and self.__customer_id == other.__customer_id and self.__items == other.__items
 
-    @client_id.setter
-    def client_id(self, client_id):
-        self.__client_id = client_id
+    def __str__(self):
+        return super().__str__() + f", Kunden-ID = '{self.__customer_id}', Artikel = '{self.__items}', Gesamtkosten = '{self.__total_price}'"
+
+    def __hash__(self):
+        return hash(self.__str__())
+
+    @property
+    def customer_id(self):
+        return self.__customer_id
+
+    @customer_id.setter
+    def customer_id(self, customer_id):
+        self.__customer_id = customer_id
 
     @property
     def items(self):
