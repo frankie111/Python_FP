@@ -84,6 +84,7 @@ class OrderController:
         item_ids = list(map(lambda it: it.id, items))
         new_order = Order(0, customer_ids, item_ids)
         new_order.compute_total_price(items)
+        new_order.create_time_stamp()
 
         res = self.__order_repo.add(new_order)
         if res == Repository.Result.SUCCESS:

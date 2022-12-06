@@ -1,14 +1,18 @@
+from datetime import datetime, timedelta
 from functools import reduce
 
+from lab5.models.CookedDish import CookedDish
 from lab5.models.Identifiable import Identifiable
 
 
 class Order(Identifiable):
-    def __init__(self, id_=None, customer_id: int = None, item_ids=None, total_price: int = None, dict_=None):
+    def __init__(self, id_=None, customer_id: int = None, item_ids=None, total_price: int = None,
+                 time_stamp: str = None, dict_=None):
         super().__init__(id_)
         self.__customer_id = customer_id
         self.__item_ids = item_ids
         self.__total_price = total_price
+        self.__time_stamp = time_stamp
         if dict_ is not None:
             self.__dict__ = dict_
 
@@ -46,6 +50,29 @@ class Order(Identifiable):
     def total_price(self, total_price):
         self.__total_price = total_price
 
+    @property
+    def time_stamp(self):
+        return self.__time_stamp
+
+    @time_stamp.setter
+    def time_stamp(self, time_stamp):
+        self.__time_stamp = time_stamp
+
+    def create_time_stamp(self):
+        """
+        Method for creating the timestamp of this Order (as a string in iso format)
+        """
+        self.__time_stamp = datetime.now().isoformat()
+
+    def compute_etd(self, dishes: list[CookedDish]):
+        """
+        Returns the estimated time of delivery for the current order
+        :param dishes: The list of cooked dishes present in this order, as drinks don't have a prep_time
+        """
+        max_prep_time = max(dishes, key=lambda dish: dish.prep_time).prep_time
+        etd = datetime.fromisoformat(self.__time_stamp) + timedelta(minutes=max_prep_time)
+        return etd.isoformat()
+
     def compute_total_price(self, items):
         """
         Adds up the prices from the items list
@@ -63,6 +90,16 @@ class Order(Identifiable):
         self.compute_total_price(items)
         bill_lines = list(map(lambda item: f"{item.name} " + "." * (30 - len(item.name)) + f" {item.price}", items))
         bill_lines.append(f"\nGesamtkosten " + '.' * 18 + f" {self.__total_price}")
+
+        dishes = []
+        for it in items:
+            if type(it) == CookedDish:
+                dishes.append(it)
+
+        time = datetime.fromisoformat(self.__time_stamp).strftime(" %R ")
+        etd = datetime.fromisoformat(self.compute_etd(dishes)).strftime(" %R ")
+        bill_lines.append(f"\nUhrzeit der Bestellung: {time}")
+        bill_lines.append(f"Voraussichtliche Lieferzeit: {etd}")
 
         return reduce(lambda a, b: a + '\n' + b, bill_lines)
 
