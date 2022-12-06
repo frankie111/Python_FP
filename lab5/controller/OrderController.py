@@ -5,7 +5,7 @@ from lab5.repository.CustomerRepository import CustomerRepository
 from lab5.repository.DrinkRepository import DrinkRepository
 from lab5.repository.OrderRepository import OrderRepository
 from lab5.repository.Repository import Repository
-from lab5.ui.UIController import menu, invalid, header, footer, warning
+from lab5.ui.UIController import menu, invalid, header, footer, warning, tooltip
 
 
 class OrderController:
@@ -58,19 +58,37 @@ class OrderController:
         footer("Bestellungen")
 
     def __add_order(self):
-        orders = self.__order_repo.get_all()
+        """
+        Menu for adding a new order
+        :return:
+        """
+        # orders = self.__order_repo.get_all()
         customers = self.__customer_repo.get_all()
         dishes = self.__cooked_dish_repo.get_all()
         drinks = self.__drink_repo.get_all()
         header("Neue Bestellung")
 
-        self.__select_customer(customers)
-        exit(0)
+        customer_id = self.__select_customer(customers)
+        items = self.__select_items(drinks, dishes)
+        for item in items:
+            print(item)
 
         footer("Neue Bestellung")
-        new_order = Order(0, )
+        new_order = Order(0, customer_id, items)
+        new_order.compute_total_price(items)
+
+        res = self.__order_repo.add(new_order)
+        if res == Repository.Result.SUCCESS:
+            print(f"Bestellung hinzugefügt: {new_order}")
+        elif res == Repository.Result.ALREADY_EXISTS:
+            warning(f"Diese Bestellung ist bereits vorhanden")
 
     def __select_customer(self, customers: list[Customer]):
+        """
+        Menu for selecting a customer when creating an order
+        :param customers:
+        :return:
+        """
         opt = menu("Kunden auswählen", ["Liste Anzeigen", "Suchen", "Neuer Kunde"])
         if not opt.isnumeric():
             invalid()
@@ -90,7 +108,7 @@ class OrderController:
                 invalid()
                 self.__add_order()
 
-        print(cus)
+        return cus
 
     def __select_customer_from_list(self, customers: list[Customer]):
         opt = menu("Kunden auswählen", customers, "=")
@@ -157,3 +175,30 @@ class OrderController:
             warning(f"Der Kunde [{new_customer}] ist bereits vorhanden")
 
         return new_customer.__hash__()
+
+    @staticmethod
+    def __select_items(drinks, dishes):
+        header("Artikel wählen")
+        tooltip("Tippen sie die Artikel getrennt mit Kommas")
+        opt = menu("Getränke", drinks, "=")
+        indexes = opt.split(',')
+        indexes = list(map(lambda idx: int(idx.strip()) - 1, indexes))
+        drink_list = []
+        for i in indexes:
+            if i in range(len(drinks)):
+                drink_list.append(drinks[i])
+            else:
+                warning(f"{i + 1} ist keine gültige Option")
+
+        opt = menu("Speisen", dishes, "=")
+        indexes = opt.split(',')
+        indexes = list(map(lambda idx: int(idx.strip()) - 1, indexes))
+        dish_list = []
+        for i in indexes:
+            if i in range(len(dishes)):
+                dish_list.append(dishes[i])
+            else:
+                warning(f"{i + 1} ist keine gültige Option")
+
+        footer("Artikel wählen")
+        return [*drink_list, *dish_list]

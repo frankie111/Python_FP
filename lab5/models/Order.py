@@ -4,7 +4,7 @@ from lab5.models.Identifiable import Identifiable
 
 
 class Order(Identifiable):
-    def __init__(self, id_=None, customer_id=None, items=None, total_price=None, dict_=None):
+    def __init__(self, id_=None, customer_id:int=None, items=None, total_price:int=None, dict_=None):
         super().__init__(id_)
         self.__customer_id = customer_id
         self.__items = items
@@ -45,20 +45,21 @@ class Order(Identifiable):
     def total_price(self, total_price):
         self.__total_price = total_price
 
-    def compute_total_price(self):
+    def compute_total_price(self, items):
         """
         Adds up the prices from the items list
         :returns: Total order price
         """
-        self.__total_price = reduce(lambda a, m: a + m.price, self.__items, 0)
+        # items[0] = items[0].id
+        self.__total_price = reduce(lambda a, m: a + m.price, items, 0)
         return self.__total_price
 
-    def __generate_bill(self):
+    def __generate_bill(self, items):
         """
         Generates and returns a bill, containing the items of this order
         :returns: The bill as a string
         """
-        self.compute_total_price()
+        self.compute_total_price(items)
         bill_lines = list(map(lambda m: f"{m.id} " + "." * (30 - len(m.id)) + f" {m.price}", self.__items))
         bill_lines.insert(0, "Rechnung:\n")
         bill_lines.append(f"\nGesamtkosten " + '.' * 18 + f" {self.__total_price}")

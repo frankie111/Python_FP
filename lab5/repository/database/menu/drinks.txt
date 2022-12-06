@@ -1,16 +1,23 @@
 [
     {
         "_Identifiable__id": 5720481618582861730,
-        "_Dish__portion_size": "500",
-        "_Dish__price": "5",
+        "_Dish__portion_size": 500,
+        "_Dish__price": 5,
         "_Dish__name": "Cola",
-        "_Drink__alcohol_content": "0"
+        "_Drink__alcohol_content": 0
     },
     {
         "_Identifiable__id": 5388085492490886709,
-        "_Dish__portion_size": "330",
-        "_Dish__price": "8",
+        "_Dish__portion_size": 330,
+        "_Dish__price": 8,
         "_Dish__name": "Heineken",
-        "_Drink__alcohol_content": "5"
+        "_Drink__alcohol_content": 5
+    },
+    {
+        "_Identifiable__id": 1997437952465601130,
+        "_Dish__portion_size": 500,
+        "_Dish__price": 69,
+        "_Dish__name": "Beutura",
+        "_Drink__alcohol_content": 420
     }
 ]

@@ -21,6 +21,7 @@ class DataFormatter:
         """
         Reads the JSON string from self.__file and converts it to a list of objects
         :returns: A list of objects | -1 if file is empty
+        :rtype: list[Identifiable] | int
         """
         contents = self.read_file()
         if contents == "":

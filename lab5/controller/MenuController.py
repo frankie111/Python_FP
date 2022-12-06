@@ -10,8 +10,7 @@ class MenuController:
         self.__cooked_dish_repo = cooked_dish_repo
 
     def menu(self):
-        opt = menu("Speisekarte Verwaltung",
-                   ["Alle Anzeigen", "Hinzufügen", "Aktualisieren", "Löschen", "<-Zurück"])
+        opt = menu("Speisekarte Verwaltung", ["Alle Anzeigen", "Hinzufügen", "Aktualisieren", "Löschen", "<-Zurück"])
 
         if not opt.isnumeric():
             invalid()
@@ -76,9 +75,9 @@ class MenuController:
     def __add_drink(self):
         header("Neues Getränk")
         name = input("Name=")
-        portion_size = input("PortionsGröße=")
-        price = input("Preis=")
-        alcohol_content = input("Alkoholgehalt=")
+        portion_size = int(input("PortionsGröße="))
+        price = int(input("Preis="))
+        alcohol_content = int(input("Alkoholgehalt="))
 
         new_drink = Drink(id_=0, name=name, portion_size=portion_size, price=price, alcohol_content=alcohol_content)
         res = self.__drink_repo.add(new_drink)
@@ -152,11 +151,11 @@ class MenuController:
         if name != '':
             updated_drink.name = name
         if portion_size != '':
-            updated_drink.portion_size = portion_size
+            updated_drink.portion_size = int(portion_size)
         if price != '':
-            updated_drink.price = price
+            updated_drink.price = int(price)
         if alcohol_content != '':
-            updated_drink.alcohol_content = alcohol_content
+            updated_drink.alcohol_content = int(alcohol_content)
 
         res = self.__drink_repo.update(drink, updated_drink)
         if res == Repository.Result.SUCCESS:
@@ -190,11 +189,11 @@ class MenuController:
         if name != '':
             updated_dish.name = name
         if portion_size != '':
-            updated_dish.portion_size = portion_size
+            updated_dish.portion_size = int(portion_size)
         if price != '':
-            updated_dish.price = price
+            updated_dish.price = int(price)
         if prep_time != '':
-            updated_dish.prep_time = prep_time
+            updated_dish.prep_time = int(prep_time)
 
         res = self.__cooked_dish_repo.update(dish, updated_dish)
         if res == Repository.Result.SUCCESS:

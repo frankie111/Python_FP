@@ -93,7 +93,7 @@ class Repository:
 
         return Repository.Result.NOT_FOUND
 
-    def search(self, obj:Identifiable):
+    def search(self, obj: Identifiable):
         """
         Returns a list of matching objects from the database
         filters the database by part of the first not None attribute of obj
@@ -112,6 +112,20 @@ class Repository:
                     return filtered
 
         return []
+
+    def get_by_id(self, id_):
+        """
+        Returns an object with matching id or Result.NOT_FOUND
+        :param id_:
+        :rtype: Identifiable | Repository.Result.NOT_FOUND
+        """
+        obj_list = self.__formatter.load()
+
+        for obj in obj_list:
+            if obj.id == id_:
+                return obj
+
+        return Repository.Result.NOT_FOUND
 
     def get_all(self):
         """
