@@ -68,13 +68,12 @@ class OrderController:
         drinks = self.__drink_repo.get_all()
         header("Neue Bestellung")
 
-        customer_id = self.__select_customer(customers)
+        customer_ids = self.__select_customer(customers)
         items = self.__select_items(drinks, dishes)
-        for item in items:
-            print(item)
 
         footer("Neue Bestellung")
-        new_order = Order(0, customer_id, items)
+        item_ids = list(map(lambda it: it.id, items))
+        new_order = Order(0, customer_ids, item_ids)
         new_order.compute_total_price(items)
 
         res = self.__order_repo.add(new_order)

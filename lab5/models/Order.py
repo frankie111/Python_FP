@@ -4,19 +4,19 @@ from lab5.models.Identifiable import Identifiable
 
 
 class Order(Identifiable):
-    def __init__(self, id_=None, customer_id:int=None, items=None, total_price:int=None, dict_=None):
+    def __init__(self, id_=None, customer_id:int=None, item_ids=None, total_price:int=None, dict_=None):
         super().__init__(id_)
         self.__customer_id = customer_id
-        self.__items = items
+        self.__item_ids = item_ids
         self.__total_price = total_price
         if dict_ is not None:
             self.__dict__ = dict_
 
     def __eq__(self, other):
-        return super().__eq__(other) and self.__customer_id == other.__customer_id and self.__items == other.__items
+        return super().__eq__(other) and self.__customer_id == other.__customer_id and self.__item_ids == other.__item_ids
 
     def __str__(self):
-        return super().__str__() + f", Kunden-ID = '{self.__customer_id}', Artikel = '{self.__items}', Gesamtkosten = '{self.__total_price}'"
+        return super().__str__() + f", Kunden-ID = '{self.__customer_id}', Artikel = '{self.__item_ids}', Gesamtkosten = '{self.__total_price}'"
 
     def __hash__(self):
         return hash(self.__str__())
@@ -30,12 +30,12 @@ class Order(Identifiable):
         self.__customer_id = customer_id
 
     @property
-    def items(self):
-        return self.__items
+    def item_ids(self):
+        return self.__item_ids
 
-    @items.setter
-    def items(self, items):
-        self.__items = items
+    @item_ids.setter
+    def item_ids(self, item_ids):
+        self.__item_ids = item_ids
 
     @property
     def total_price(self):
@@ -60,7 +60,7 @@ class Order(Identifiable):
         :returns: The bill as a string
         """
         self.compute_total_price(items)
-        bill_lines = list(map(lambda m: f"{m.id} " + "." * (30 - len(m.id)) + f" {m.price}", self.__items))
+        bill_lines = list(map(lambda m: f"{m.id} " + "." * (30 - len(m.id)) + f" {m.price}", self.__item_ids))
         bill_lines.insert(0, "Rechnung:\n")
         bill_lines.append(f"\nGesamtkosten " + '.' * 18 + f" {self.__total_price}")
 
