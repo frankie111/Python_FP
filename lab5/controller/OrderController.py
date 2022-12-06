@@ -48,12 +48,12 @@ class OrderController:
     def __show_all_orders(self):
         header("Bestellungen")
         orders = self.__order_repo.get_all()
-        customers = self.__customer_repo.get_all()
-        dishes = self.__cooked_dish_repo.get_all()
-        drinks = self.__drink_repo.get_all()
 
         for i in range(len(orders)):
-            print(f"{i + 1}. {orders[i]}")
+            cus = self.__customer_repo.find_by_id(orders[i].customer_id)
+            items = [*self.__drink_repo.find_by_ids(orders[i].item_ids),
+                     *self.__cooked_dish_repo.find_by_ids(orders[i].item_ids)]
+            print(f"{i + 1}. {orders[i].pprint(cus, items)}\n")
 
         footer("Bestellungen")
 

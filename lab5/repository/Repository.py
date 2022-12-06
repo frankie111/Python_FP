@@ -113,7 +113,7 @@ class Repository:
 
         return []
 
-    def get_by_id(self, id_):
+    def find_by_id(self, id_):
         """
         Returns an object with matching id or Result.NOT_FOUND
         :param id_:
@@ -127,6 +127,19 @@ class Repository:
 
         return Repository.Result.NOT_FOUND
 
+    def find_by_ids(self, ids):
+        """
+        Returns a list of with matching ids
+        :param ids:
+        :return:
+        """
+        res = []
+        for id_ in ids:
+            obj = self.find_by_id(id_)
+            if obj is not Repository.Result.NOT_FOUND:
+                res.append(obj)
+
+        return res
     def get_all(self):
         """
         Returns a list of all objects from the database
