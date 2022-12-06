@@ -21,9 +21,15 @@ class Controller:
                                                 self.__drink_repo)
 
     def run(self):
+        """
+        The main method of Controller
+        """
         self.main_menu()
 
     def main_menu(self):
+        """
+        The main menu of the application
+        """
         opt = menu("Restaurant Verwaltung app", ["Bestellungen", "Speisekarte", "Kunden", "<-Exit"])
         if not opt.isnumeric():
             invalid()
@@ -47,9 +53,3 @@ class Controller:
             case _:
                 invalid()
                 self.main_menu()
-
-    def order_menu(self):
-        pass
-
-    def menu_menu(self):
-        pass

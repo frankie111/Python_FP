@@ -1,4 +1,6 @@
+from lab5.models.CookedDish import CookedDish
 from lab5.models.Customer import Customer
+from lab5.models.Drink import Drink
 from lab5.models.Order import Order
 from lab5.repository.CookedDishRepository import CookedDishRepository
 from lab5.repository.CustomerRepository import CustomerRepository
@@ -9,6 +11,10 @@ from lab5.ui.UIController import menu, invalid, header, footer, warning, tooltip
 
 
 class OrderController:
+    """
+    A class containing the menus and methods for managing orders
+    """
+
     def __init__(self, customer_repo: CustomerRepository, order_repo: OrderRepository,
                  cooked_dish_repo: CookedDishRepository, drink_repo: DrinkRepository):
         self.__customer_repo = customer_repo
@@ -17,8 +23,11 @@ class OrderController:
         self.__drink_repo = drink_repo
 
     def menu(self):
+        """
+        Main menu for order management
+        """
         opt = menu("Bestellungen Verwaltung",
-                   ["Alle Anzeigen", "Hinzufügen", "Löschen", "Finden", "<-Zurück"])
+                   ["Alle Anzeigen", "Hinzufügen", "Löschen", "<-Zurück"])
         if not opt.isnumeric():
             invalid()
             self.menu()
@@ -36,8 +45,6 @@ class OrderController:
                 self.__remove_order()
                 self.menu()
             case 4:
-                pass
-            case 5:
                 # caller menu will resume
                 return
             case _:
@@ -45,6 +52,9 @@ class OrderController:
                 self.menu()
 
     def __show_all_orders(self):
+        """
+        Method for pretty printing all existent orders
+        """
         header("Bestellungen")
         orders = self.__order_repo.get_all()
 
@@ -59,7 +69,7 @@ class OrderController:
     def __add_order(self):
         """
         Menu for adding a new order
-        :return:
+        The user selects the customer and the items to be added to the new order
         """
         # orders = self.__order_repo.get_all()
         customers = self.__customer_repo.get_all()
@@ -84,8 +94,8 @@ class OrderController:
     def __select_customer(self, customers: list[Customer]):
         """
         Menu for selecting a customer when creating an order
-        :param customers:
-        :return:
+        Called by __add_order()
+        :param customers: A list of all customers
         """
         opt = menu("Kunden auswählen", ["Liste Anzeigen", "Suchen", "Neuer Kunde"])
         if not opt.isnumeric():
@@ -109,6 +119,11 @@ class OrderController:
         return cus
 
     def __select_customer_from_list(self, customers: list[Customer]):
+        """
+        Menu for selecting a customer from the list of all customers
+        Called by __select_customer()
+        :param customers: A list of all customers
+        """
         opt = menu("Kunden auswählen", customers, "=")
         if not opt.isnumeric():
             invalid()
@@ -124,6 +139,10 @@ class OrderController:
             self.__select_customer_from_list(customers)
 
     def __select_customer_by_search(self):
+        """
+        Menu for selecting a customer from a filtered list
+        Called by __select_customer()
+        """
         opt = menu("Suche Kunden nach", ["Name", "Adresse"])
         if not opt.isnumeric():
             invalid()
@@ -160,6 +179,10 @@ class OrderController:
         return cus.id
 
     def __select_customer_add_new(self):
+        """
+        Menu for adding a new customer for the newly created order
+        Called by __select_customer()
+        """
         header("Neuer Kunde")
         name = input("Name=")
         address = input("Adresse=")
@@ -175,7 +198,14 @@ class OrderController:
         return new_customer.__hash__()
 
     @staticmethod
-    def __select_items(drinks, dishes):
+    def __select_items(drinks: list[Drink], dishes: list[CookedDish]):
+        """
+        Menu for selecting the items to be included in the newly created order
+        Called by __add_order()
+        :param drinks:
+        :param dishes:
+        :returns: A list of all user selected items
+        """
         header("Artikel wählen")
         tooltip("Tippen sie die Artikel getrennt mit Kommas")
         opt = menu("Getränke", drinks, "=")
@@ -202,6 +232,10 @@ class OrderController:
         return [*drink_list, *dish_list]
 
     def __remove_order(self):
+        """
+        Menu for removing an order
+        User selects from the list of all existent orders
+        """
         orders = self.__order_repo.get_all()
         options = []
         for i in range(len(orders)):

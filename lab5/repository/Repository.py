@@ -1,10 +1,16 @@
 from enum import Enum
 
 from lab5.models.Identifiable import Identifiable
+from lab5.repository.formatters.DataFormatter import DataFormatter
 
 
 class Repository:
-    def __init__(self, formatter):
+    """
+    An abstract class containing database access methods
+    Classes derived from Repository should pass a DataFormatter for the specific data type to be used
+    """
+
+    def __init__(self, formatter: DataFormatter):
         self.__formatter = formatter
 
     def add(self, obj):
@@ -140,6 +146,7 @@ class Repository:
                 res.append(obj)
 
         return res
+
     def get_all(self):
         """
         Returns a list of all objects from the database

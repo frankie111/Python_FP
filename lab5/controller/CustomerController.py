@@ -9,6 +9,9 @@ class CustomerController:
         self.__customer_repo = customer_repo
 
     def menu(self):
+        """
+        Main menu for managing customers
+        """
         opt = menu("Kunden Verwaltung",
                    ["Alle Anzeigen", "Hinzufügen", "Aktualisieren", "Löschen", "Finden", "<-Zurück"])
         if not opt.isnumeric():
@@ -40,6 +43,9 @@ class CustomerController:
                 self.menu()
 
     def __show_all_customers(self):
+        """
+        Method for pretty printing all customers
+        """
         header("Kundenliste")
         customers = self.__customer_repo.get_all()
         for i in range(len(customers)):
@@ -47,6 +53,9 @@ class CustomerController:
         footer("Kundenliste")
 
     def __add_customer(self):
+        """
+        Menu for adding a new customer
+        """
         header("Neuer Kunde")
         name = input("Name=")
         address = input("Adresse=")
@@ -60,6 +69,9 @@ class CustomerController:
             warning(f"Der Kunde [{new_customer}] ist bereits vorhanden")
 
     def __update_customer(self):
+        """
+        Menu for updating the data of a customer
+        """
         header("Kunden aktualisieren nach index")
         opt = menu("Listentyp", ["Liste Anzeigen", "Suchen"])
         if not opt.isnumeric():
@@ -127,6 +139,9 @@ class CustomerController:
         footer("Kunden aktualisieren nach index")
 
     def __remove_customer(self):
+        """
+        Menu for removing a customer by picking from a list or searching by name or address
+        """
         header("Kunden Löschen nach index")
         opt = menu("Listentyp", ["Liste Anzeigen", "Suchen"])
         if not opt.isnumeric():
@@ -181,6 +196,9 @@ class CustomerController:
         self.menu()
 
     def __search_customer(self):
+        """
+        Menu for searching for customers by name or address
+        """
         opt = menu("Suche Kunden nach", ["Name", "Adresse"])
         if not opt.isnumeric():
             invalid()

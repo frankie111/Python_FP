@@ -10,6 +10,10 @@ class MenuController:
         self.__cooked_dish_repo = cooked_dish_repo
 
     def menu(self):
+        """
+        Main menu for managing the restaurant menu
+        :return:
+        """
         opt = menu("Speisekarte Verwaltung", ["Alle Anzeigen", "Hinzufügen", "Aktualisieren", "Löschen", "<-Zurück"])
 
         if not opt.isnumeric():
@@ -39,6 +43,9 @@ class MenuController:
                 self.menu()
 
     def __show_all_items(self):
+        """
+        Method for pretty printing all menu items
+        """
         header("Speisekarte", '=_=')
         drinks = self.__drink_repo.get_all()
         dishes = self.__cooked_dish_repo.get_all()
@@ -52,6 +59,9 @@ class MenuController:
         footer("Speisekarte", '=_=')
 
     def __add_item(self):
+        """
+        Menu for adding a new menu item (drink/dish)
+        """
         opt = menu("Artikel hinzufügen", ["Getränk", "Speise", "<-Zurück"])
         if not opt.isnumeric():
             invalid()
@@ -73,6 +83,10 @@ class MenuController:
                 self.__add_item()
 
     def __add_drink(self):
+        """
+        Menu for adding a new drink to the menu
+        Called by __add_item()
+        """
         header("Neues Getränk")
         name = input("Name=")
         portion_size = int(input("PortionsGröße="))
@@ -88,6 +102,10 @@ class MenuController:
         footer("Neues Getränk")
 
     def __add_dish(self):
+        """
+        Menu for adding a new dish to the menu
+        Called by __add_item()
+        """
         header("Neue Speise")
         name = input("Name=")
         portion_size = input("PortionsGröße=")
@@ -103,6 +121,9 @@ class MenuController:
         footer("Neue Speise")
 
     def __update_item(self):
+        """
+        Menu for updating a menu item (drink/dish)
+        """
         header("Artikel aktualisieren nach index")
         opt = menu("Artikeltyp", ["Getränk", "Speise", "<-Zurück"])
         if not opt.isnumeric():
@@ -128,6 +149,10 @@ class MenuController:
         footer("Artikel aktualisieren nach index")
 
     def __update_drink(self):
+        """
+        Menu for updating a drink from the menu
+        Called by __update_item()
+        """
         drinks = self.__drink_repo.get_all()
         opt = menu("Getränk aktualisieren", drinks, "=")
         if not opt.isnumeric():
@@ -166,6 +191,10 @@ class MenuController:
         footer("Infos aktualisieren")
 
     def __update_dish(self):
+        """
+        Menu for updating a dish from the menu
+        Called by __update_item()
+        """
         dishes = self.__cooked_dish_repo.get_all()
         opt = menu("Speise aktualisieren", dishes, "=")
         if not opt.isnumeric():
@@ -204,6 +233,9 @@ class MenuController:
         footer("Infos aktualisieren")
 
     def __remove_item(self):
+        """
+        Menu for removing a menu item (drink/dish)
+        """
         header("Artikel löschen")
         opt = menu("Artikeltyp", ["Getränk", "Speise", "<-Zurück"])
         if not opt.isnumeric():
@@ -227,6 +259,10 @@ class MenuController:
                 self.__remove_item()
 
     def __remove_drink(self):
+        """
+        Menu for removing a drink from the menu
+        Called by __remove_item()
+        """
         drinks = self.__drink_repo.get_all()
         opt = menu("Getränk löschen", drinks, "=")
         if not opt.isnumeric():
@@ -246,6 +282,10 @@ class MenuController:
             warning(f"Das Getränk [{drink}] wurde nicht gefunden")
 
     def __remove_dish(self):
+        """
+        Menu for removing a dish from the menu
+        Called by __remove_item()
+        """
         dishes = self.__cooked_dish_repo.get_all()
         opt = menu("Speise löschen", dishes, "=")
         if not opt.isnumeric():

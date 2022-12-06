@@ -62,7 +62,6 @@ class Order(Identifiable):
         """
         self.compute_total_price(items)
         bill_lines = list(map(lambda item: f"{item.name} " + "." * (30 - len(item.name)) + f" {item.price}", items))
-        # bill_lines.insert(0, "Rechnung:\n")
         bill_lines.append(f"\nGesamtkosten " + '.' * 18 + f" {self.__total_price}")
 
         return reduce(lambda a, b: a + '\n' + b, bill_lines)
@@ -74,5 +73,10 @@ class Order(Identifiable):
         print(self.__generate_bill(items))
 
     def pprint(self, customer, items):
+        """
+        Returns a string for pretty printing an order
+        :param customer: The customer on this order
+        :param items: A list of items contained in this order
+        """
         return f"Bestellung {self.id} für {customer.name} - Adresse: {customer.address}:\n" + self.__generate_bill(
             items)
