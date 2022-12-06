@@ -18,7 +18,7 @@ class OrderController:
 
     def menu(self):
         opt = menu("Bestellungen Verwaltung",
-                   ["Alle Anzeigen", "Hinzufügen", "Aktualisieren", "Löschen", "Finden", "<-Zurück"])
+                   ["Alle Anzeigen", "Hinzufügen", "Löschen", "Finden", "<-Zurück"])
         if not opt.isnumeric():
             invalid()
             self.menu()
@@ -33,12 +33,11 @@ class OrderController:
                 self.__add_order()
                 self.menu()
             case 3:
-                pass
+                self.__remove_order()
+                self.menu()
             case 4:
                 pass
             case 5:
-                pass
-            case 6:
                 # caller menu will resume
                 return
             case _:
@@ -201,3 +200,29 @@ class OrderController:
 
         footer("Artikel wählen")
         return [*drink_list, *dish_list]
+
+    def __remove_order(self):
+        orders = self.__order_repo.get_all()
+        options = []
+        for i in range(len(orders)):
+            cus = self.__customer_repo.find_by_id(orders[i].customer_id)
+            items = [*self.__drink_repo.find_by_ids(orders[i].item_ids),
+                     *self.__cooked_dish_repo.find_by_ids(orders[i].item_ids)]
+            options.append(orders[i].pprint(cus, items))
+
+        opt = menu("Bestellung löschen", options, "=")
+        if not opt.isnumeric():
+            invalid()
+            self.__remove_order()
+        opt = int(opt)
+        if opt not in range(1, len(options) + 1):
+            invalid()
+            self.__remove_order()
+
+        order = orders[opt - 1]
+        res = self.__order_repo.remove(order)
+
+        if res == Repository.Result.SUCCESS:
+            print(f"Die Bestellung mit id [{order.id}] wurde gelöscht")
+        elif res == Repository.Result.NOT_FOUND:
+            print(f"Die Bestellung mit id [{order.id}] wurde nicht gefunden")
