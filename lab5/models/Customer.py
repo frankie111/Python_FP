@@ -1,5 +1,5 @@
 from lab5.models.Identifiable import Identifiable
-
+import hashlib
 
 class Customer(Identifiable):
     def __init__(self, id_=0, name=None, address=None, dict_=None):
@@ -16,7 +16,8 @@ class Customer(Identifiable):
         return f"Name = '{self.__name}', Adresse = '{self.__address}'"
 
     def __hash__(self):
-        return hash(self.__str__())
+        encoded_str = self.__str__().encode()
+        return hashlib.sha1(encoded_str).hexdigest()
 
     @property
     def name(self):

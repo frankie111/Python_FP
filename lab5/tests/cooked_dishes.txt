@@ -1,0 +1,16 @@
+[
+    {
+        "_Identifiable__id": "b3b706ae41bf913b1968ce682c88bb740238860e",
+        "_Dish__portion_size": 400,
+        "_Dish__price": 35,
+        "_Dish__name": "Sarmale",
+        "_CookedDish__prep_time": 60
+    },
+    {
+        "_Identifiable__id": "298826c739d358070332bc9749b2f83e2b207cb1",
+        "_Dish__portion_size": 350,
+        "_Dish__price": 24,
+        "_Dish__name": "Ciorba de burta",
+        "_CookedDish__prep_time": 45
+    }
+]

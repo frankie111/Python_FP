@@ -1,3 +1,5 @@
+import hashlib
+
 from lab5.models.Dish import Dish
 
 
@@ -16,7 +18,8 @@ class Drink(Dish):
         return super().__str__() + f", Alkoholgehalt = '{self.__alcohol_content}'"
 
     def __hash__(self):
-        return hash(self.__str__())
+        encoded_str = self.__str__().encode()
+        return hashlib.sha1(encoded_str).hexdigest()
 
     @property
     def alcohol_content(self):

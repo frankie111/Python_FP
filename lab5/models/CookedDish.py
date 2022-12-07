@@ -1,3 +1,5 @@
+import hashlib
+
 from lab5.models.Dish import Dish
 
 
@@ -15,7 +17,8 @@ class CookedDish(Dish):
         return super().__str__() + f", Zubereitungszeit = '{self.__prep_time}'"
 
     def __hash__(self):
-        return hash(self.__str__())
+        encoded_string = self.__str__().encode()
+        return hashlib.sha1(encoded_string).hexdigest()
 
     @property
     def prep_time(self):

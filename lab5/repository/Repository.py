@@ -155,6 +155,12 @@ class Repository:
         obj_list = self.__formatter.load()
         return obj_list if obj_list != -1 else []
 
+    def clear(self):
+        """
+        Clears the database
+        """
+        self.__formatter.clear_file()
+
     class Result(Enum):
         SUCCESS = 1
         ALREADY_EXISTS = 2

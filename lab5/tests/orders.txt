@@ -1,0 +1,12 @@
+[
+    {
+        "_Identifiable__id": -2967661474956871313,
+        "_Order__customer_id": "e53558613f8b5cf0d03e52d0e1be7af69de4cc2c",
+        "_Order__item_ids": [
+            "b3b706ae41bf913b1968ce682c88bb740238860e",
+            "298826c739d358070332bc9749b2f83e2b207cb1"
+        ],
+        "_Order__total_price": 59,
+        "_Order__time_stamp": "2022-12-07T19:29:56.051349"
+    }
+]

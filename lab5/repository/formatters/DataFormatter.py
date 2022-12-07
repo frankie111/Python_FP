@@ -34,7 +34,7 @@ class DataFormatter:
         Reads and returns the contents of self.__file
         :rtype: str
         """
-        file = open(self.file, 'r')
+        file = open(self.__file, 'r')
         content = file.read()
         file.close()
         return content
@@ -44,9 +44,15 @@ class DataFormatter:
         Writes content to self.__file
         :param content:
         """
-        file = open(self.file, 'w')
+        file = open(self.__file, 'w')
         file.write(content)
         file.close()
+
+    def clear_file(self):
+        """
+        Clears self.__file
+        """
+        open(self.__file, 'w').close()
 
     def convert_to_string(self, obj_list):
         """

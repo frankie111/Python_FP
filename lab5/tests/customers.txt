@@ -1,0 +1,7 @@
+[
+    {
+        "_Identifiable__id": "e53558613f8b5cf0d03e52d0e1be7af69de4cc2c",
+        "_Customer__name": "Marian",
+        "_Customer__address": "Str. Ciocan"
+    }
+]
