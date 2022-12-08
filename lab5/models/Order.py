@@ -115,5 +115,5 @@ class Order(Identifiable):
         :param customer: The customer on this order
         :param items: A list of items contained in this order
         """
-        return f"Bestellung {self.id} für {customer.name} - Adresse: {customer.address}:\n" + self.__generate_bill(
+        return f"Bestellung {self.id} für {customer.name} - Adresse: {customer.address}:\n" + self.generate_bill(
             items)
