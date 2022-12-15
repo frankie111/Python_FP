@@ -70,7 +70,7 @@ class Order(Identifiable):
         :param dishes: The list of cooked dishes present in this order, as drinks don't have a prep_time
         """
         max_prep_time = max(dishes, key=lambda dish: dish.prep_time).prep_time
-        etd = datetime.fromisoformat(self.__time_stamp) + timedelta(minutes=max_prep_time)
+        etd = datetime.fromisoformat(self.__time_stamp) + timedelta(minutes=int(max_prep_time))
         return etd.isoformat()
 
     def compute_total_price(self, items):
@@ -79,7 +79,7 @@ class Order(Identifiable):
         :returns: Total order price
         """
         # items[0] = items[0].id
-        self.__total_price = reduce(lambda a, m: a + m.price, items, 0)
+        self.__total_price = reduce(lambda a, m: a + int(m.price), items, 0)
         return self.__total_price
 
     def generate_bill(self, items):

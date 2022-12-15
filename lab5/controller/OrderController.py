@@ -55,7 +55,7 @@ class OrderController:
         """
         Method for pretty printing all existent orders
         """
-        header("Bestellungen")
+        header("Bestellungen", '=')
         orders = self.__order_repo.get_all()
 
         for i in range(len(orders)):
@@ -64,7 +64,7 @@ class OrderController:
                      *self.__cooked_dish_repo.find_by_ids(orders[i].item_ids)]
             print(f"{i + 1}. {orders[i].pprint(cus, items)}\n")
 
-        footer("Bestellungen")
+        footer("Bestellungen", '=')
 
     def __add_order(self):
         """

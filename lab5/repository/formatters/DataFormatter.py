@@ -12,14 +12,14 @@ class DataFormatter:
 
     def save(self, obj_list):
         """
-        Converts a list of objects to a JSON string and writes it to self.__file
+        Converts a list of objects to a pickle string and writes it to self.__file
         :param obj_list:
         """
         self.write_to_file(self.convert_to_string(obj_list))
 
     def load(self):
         """
-        Reads the JSON string from self.__file and converts it to a list of objects
+        Reads the pickle string from self.__file and converts it to a list of objects
         :returns: A list of objects | -1 if file is empty
         :rtype: list[Identifiable] | int
         """
@@ -34,9 +34,10 @@ class DataFormatter:
         Reads and returns the contents of self.__file
         :rtype: str
         """
-        file = open(self.__file, 'r')
-        content = file.read()
-        file.close()
+        with open(self.__file, 'rb') as f:
+            content = f.read()
+            f.close()
+
         return content
 
     def write_to_file(self, content):
@@ -44,20 +45,20 @@ class DataFormatter:
         Writes content to self.__file
         :param content:
         """
-        file = open(self.__file, 'w')
-        file.write(content)
-        file.close()
+        with open(self.__file, 'wb') as f:
+            f.write(content)
+            f.close()
 
     def clear_file(self):
         """
         Clears self.__file
         """
-        open(self.__file, 'w').close()
+        open(self.__file, 'wb').close()
 
     def convert_to_string(self, obj_list):
         """
         Abstract method to be implemented in subclasses of DataFormatter.
-        Converts a list of objects to a JSON string
+        Converts a list of objects to a pickle string
         :param obj_list:
         :rtype: str
         """
@@ -66,7 +67,7 @@ class DataFormatter:
     def convert_from_string(self, string):
         """
         Abstract method to be implemented in subclasses of DataFormatter.
-        Converts a JSON string to a list of objects
+        Converts a pickle string to a list of objects
         :param string:
         :rtype: list
         """

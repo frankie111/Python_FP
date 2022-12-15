@@ -108,9 +108,9 @@ class MenuController:
         """
         header("Neue Speise")
         name = input("Name=")
-        portion_size = input("PortionsGröße=")
-        price = input("Preis=")
-        prep_time = input("Zubereitungszeit=")
+        portion_size = int(input("PortionsGröße="))
+        price = int(input("Preis="))
+        prep_time = int(input("Zubereitungszeit="))
 
         new_dish = CookedDish(id_=0, name=name, portion_size=portion_size, price=price, prep_time=prep_time)
         res = self.__cooked_dish_repo.add(new_dish)
@@ -168,9 +168,9 @@ class MenuController:
         header("Infos aktualisieren")
         tooltip("Um die aktuelle Infos zu behalten einfach ENTER drücken")
         name = input("Name=")
-        portion_size = input("Portionsgröße=")
-        price = input("Preis=")
-        alcohol_content = input("Alkoholgehalt=")
+        portion_size = int(input("Portionsgröße="))
+        price = int(input("Preis="))
+        alcohol_content = int(input("Alkoholgehalt="))
         updated_drink = Drink(id_=0)
 
         if name != '':
@@ -210,9 +210,9 @@ class MenuController:
         header("Infos aktualisieren")
         tooltip("Um die aktuelle Infos zu behalten einfach ENTER drücken")
         name = input("Name=")
-        portion_size = input("Portionsgröße=")
-        price = input("Preis=")
-        prep_time = input("Zubereitungszeit=")
+        portion_size = int(input("Portionsgröße="))
+        price = int(input("Preis="))
+        prep_time = int(input("Zubereitungszeit="))
         updated_dish = CookedDish(id_=0)
 
         if name != '':

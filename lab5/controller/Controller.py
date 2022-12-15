@@ -10,10 +10,10 @@ from lab5.ui.UIController import menu, invalid
 
 class Controller:
     def __init__(self, db_root="repository/database/"):
-        self.__customer_repo = CustomerRepository(f"{db_root}customers/customers.txt")
-        self.__order_repo = OrderRepository(f"{db_root}orders/orders.txt")
-        self.__cooked_dish_repo = CookedDishRepository(f"{db_root}menu/cooked_dishes.txt")
-        self.__drink_repo = DrinkRepository(f"{db_root}menu/drinks.txt")
+        self.__customer_repo = CustomerRepository(f"{db_root}customers/customers.pickle")
+        self.__order_repo = OrderRepository(f"{db_root}orders/orders.pickle")
+        self.__cooked_dish_repo = CookedDishRepository(f"{db_root}menu/cooked_dishes.pickle")
+        self.__drink_repo = DrinkRepository(f"{db_root}menu/drinks.pickle")
 
         self.customer_controller = CustomerController(self.__customer_repo)
         self.menu_controller = MenuController(self.__drink_repo, self.__cooked_dish_repo)
