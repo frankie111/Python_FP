@@ -20,12 +20,6 @@ class Controller:
         self.order_controller = OrderController(self.__customer_repo, self.__order_repo, self.__cooked_dish_repo,
                                                 self.__drink_repo)
 
-    def run(self):
-        """
-        The main method of Controller
-        """
-        self.main_menu()
-
     def main_menu(self):
         """
         The main menu of the application

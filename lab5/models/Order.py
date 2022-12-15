@@ -7,14 +7,12 @@ from lab5.models.Identifiable import Identifiable
 
 class Order(Identifiable):
     def __init__(self, id_=None, customer_id: int = None, item_ids=None, total_price: int = None,
-                 time_stamp: str = None, dict_=None):
+                 time_stamp: str = None):
         super().__init__(id_)
         self.__customer_id = customer_id
         self.__item_ids = item_ids
         self.__total_price = total_price
         self.__time_stamp = time_stamp
-        if dict_ is not None:
-            self.__dict__ = dict_
 
     def __eq__(self, other):
         return super().__eq__(
