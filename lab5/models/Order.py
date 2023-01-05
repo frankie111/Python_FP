@@ -15,8 +15,7 @@ class Order(Identifiable):
         self.__time_stamp = time_stamp
 
     def __eq__(self, other):
-        return super().__eq__(
-            other) and self.__customer_id == other.__customer_id and self.__item_ids == other.__item_ids
+        return self.__customer_id == other.__customer_id and self.__item_ids == other.__item_ids
 
     def __str__(self):
         return super().__str__() + f", Kunden-ID = '{self.__customer_id}', Artikel = '{self.__item_ids}', Gesamtkosten = '{self.__total_price}'"
