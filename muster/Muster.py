@@ -49,6 +49,7 @@ class CreditBankAccount(BankAccount):
             dif = super().withdraw(withdrawal_amount)
             self.credit_score += 1
         except NoMoneyError as e:
+            print(e.message)
             self.credit_score -= 1
             dif = -1
 
@@ -61,12 +62,13 @@ class CreditBankAccount(BankAccount):
         return new
 
 
-# acc1 = CreditBankAccount("Mircea")
-# acc1.amount = 30
-# acc2 = CreditBankAccount("Gion")
+acc1 = CreditBankAccount("Mircea")
+acc1.amount = 30
+acc2 = CreditBankAccount("Gion")
 # acc2.amount = 20
-#
-# acc3 = acc1 + acc2
+acc2.withdraw(400)
+
+acc3 = acc1 + acc2
 # print(f"{acc3.owner} {acc3.amount}")
 
 def my_func(n):
