@@ -38,7 +38,4 @@ def write_code():
     solve("three.py", ex_list[2])
 
 
-inp = input("")
-inp = int(inp)
-
 write_code()

@@ -10,40 +10,47 @@
 
 # 1.
 # a. Geben sei eine Textdatei mit dem Namen "zahlen.txt" an, auf eine mehreren Zeilen, Zahlen die durch
-# ein Tab-Zeichen "\t" getrennt sind.
+# die Zeichenkette "UBB" getrennt sind.
 # schreiben Sie eine Funktion namens "ub1", die:
-#   - einen Parameter namens "greatest" erhält
+#   - einen Parameter namens "even_row" erhält
 # 	- aus der angegebenen CSV-Datei "zahlen.txt" liest
-# 	- wenn "greatest" der Wert "True" (bool) hat, für jede Zeile, behaltet man nur die größte Zahl (0.25p)
-# 	- wenn "greatest" der Wert "False" (bool) hat, für jede Zeile, behaltet man nur die niedrigste Zahl (0.25p)
-# 	- Das Ergebnis der Funktion ist die Multiplikation aller behaltenen Zahlen (0.5p)
+# 	- wenn "even_row" der Wert "True" (bool) hat, behalten nur die Zeilen, wo alle Zahlen gerade Zahlen sind (0.25p)
+# 	- wenn "even_row" der Wert "False" (bool) hat, behalten nur die Zeilen, wo alle Zahlen ungerade Zahlen sind (0.25p)
+# 	- Das Ergebnis der Funktion ist die Summe der Zahlen der behaltenen Zeilen (0.5p)
 # Es sind keine for- oder while-Schleifen erlaubt. Es wird erwartet, dass die Lösung map, filter oder reduce und
 # andere mathematische Operationen, falls erforderlich, benützt sind. (2p)
 #
 # b. Schreiben Sie für die Funktion "ub1" zwei Testfälle. (1p)
 # Einer, der das erwartete Ergebnis der Funktion bestätigt und ein anderer, der absichtlich fehlschlägt.
 #
-# 2. a. Schreiben Sie die Definition für eine Klasse namens "DecryptedText". Die Klasse sollte in der Lage sein,
-# das Folgende zu tun: - bei der Initialisierung wird die Instanzvariable "characters" auf einen gegebenen Parameter
-# gesetzt. Der Typ des Parameters ist eine Liste von Zeichen. (0.5p) - eine Methode namens "encrypt" haben,
-# die: - für alle Zeichen aus der Liste "characters" prüft, dass sich alle im Interval "a-z" sich befindet (0.5pp) -
-# gibt eine Liste mit den konvertierten Zeichen in Zahlen zurück, die die ASCII-Tabelle verwenden (0.5p) - eine
-# benutzerdefinierte Ausnahme namens "UnacceptedValue" wirft, wenn ein Zeichen nicht im Interval befindet (0.5p)
+# 2.
+# a. Schreiben Sie die Definition für eine Klasse namens "Shop".
+# Die Klasse sollte in der Lage sein, das Folgende zu tun:
+# 	 - bei der Initialisierung wird die Instanzvariable "products" auf einen gegebenen Parameter gesetzt.
+# 	   Der Typ des Parameters ist eine Liste von strings. (0.5p)
+# 	 - eine Methode namens "buy" haben, die:
+# 	 	- einen einzelnen ganzzahligen Parameter namens "price" bekommt
+# 	 	- für alle Element aus der Liste "products" prüft, dass die doppelte Länge des Elements nicht größer als "price" ist (0.5pp)
+# 	 	- gibt eine neue Liste mit strings zurück, die dem folgenden Format behalten: "<element> - <price>" (0.5p)
+# 	 	- eine benutzerdefinierte Ausnahme namens "BadName" wirft, wenn die Prüfung der Lange nicht fördert(0.5p)
 #
-# b. Schreiben Sie die Definition für eine Klasse namens "ActualDecryptedText", die von "DecryptedText" erbt. Die
-# Klasse sollte folgendes können: - bei der Initialisierung setzt sie neben den Variablen von "CaesarDecryptedText"
-# auch eine Instanzvariable namens "numbers" auf None Wert (0.25p) - Überschreiben der Methode "decrypt",
-# um Folgendes zu tun: - Wiederverwendung der Methode "decrypt" aus der Basisklasse (0.25) - Im Falle eines
-# erfolgreichen Aufrufs wird das Ergebnis zurückgegeben und im Instanzvariable "numbers" gespeichert (0.25p) - im
-# Falle einen fehlgeschlagenen Aufruf wird die Instanzvariable "numbers" auf leere Liste gesetzt (0.25p) - Das
-# Ergebnis der Addition zwischen einer Instanz des Typs "ActualDecryptedText" und einer Zahl (instanz + 3) ist eine
-# neue Instanz des Typs "ActualDecryptedText", die die Elemente aus "numbers" um die Zahl (aus der Addition) erhöht.
-# (1p)
+# b. Schreiben Sie die Definition für eine Klasse namens "BetterShop", die von "Shop" erbt.
+#  Die Klasse sollte folgendes können:
+# 	- bei der Initialisierung setzt sie neben den Variablen von "Shop" auch eine Instanzvariable namens
+#  	  "total" auf 0 (0.25p)
+# 	- Überschreiben der Methode "buy", um Folgendes zu tun:
+# 		- Wiederverwendung der Methode "buy" aus der Basisklasse (0.25)
+# 		- Im Falle eines erfolgreichen Aufrufs wird das Ergebnis zurückgegeben und die Instanzvariable "total" mit dem
+# 	      Wert von "price" erhöht (0.25p)
+# 		- im Falle einen fehlgeschlagenen Aufruf wird die Instanzvariable "total" auf -1 gesetzt (0.25p)
+# 	- Das Ergebnis der Subtraktion zwischen zwei Instanzen des Typs "BetterShop" (shop1 - shop2) ist eine Liste
+#     von strings die sich in der "products" der beiden Instanzen befinden.
+#     (1p)
 #
 # 3. Schreibe die folgende Funktion so um, dass sie rekursiv ist: (1p)
-def my_func(lst):
-    n = len(lst)
-    total = 0
-    for num in lst:
-        total += num
-    return total / n
+def my_func(some_list, other_function):
+    my_list = []
+    for num in some_list:
+        if other_function(num):
+            my_list.append(num)
+    return my_list
