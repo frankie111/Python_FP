@@ -38,4 +38,12 @@ def write_code():
     solve("three.py", ex_list[2])
 
 
-write_code()
+# write_code()
+
+prompt = "Eine Routine hat 16.000 CPU-Anweisungen. Der Befehlssatz der CPU hat eine CPI-Wert von 5. "\
+    "Mit welcher Taktfrequenz muss die CPU getaktet sein, damit die Routine nicht länger als 6ms dauert? "\
+    "Mit Erklärung"
+
+response = openai.Completion.create(prompt=prompt, temperature=1, max_tokens=1500, model="text-davinci-003")
+
+print(response.choices[0].text)
